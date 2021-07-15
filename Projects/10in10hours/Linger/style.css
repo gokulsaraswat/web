@@ -1,0 +1,31 @@
+
+body, html {
+    overflow: hidden;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    color: #f4f4f4;
+    background: #111;
+    height: 100%;
+  
+    -webkit-user-select: none;
+  }
+  
+  canvas {
+    position: absolute;
+    background: #111;
+    cursor: crosshair;
+  }
+  
+  .instructions {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    width: 100%;
+    text-align: center;
+    color: #666;
+  }
+  
+  .instructions em {
+    color: #999;
+  }
