@@ -1,5 +1,5 @@
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-49-orange.svg?style=flat-square)](#contributors)
+<!-- [![All Contributors](https://img.shields.io/badge/all_contributors-49-orange.svg?style=flat-square)](#contributors) -->
 ![](https://github.com/rishabh115/Interview-Questions/blob/master/thumbnail.png)
 
 # Companies<sup title="Companies whose are articles are properly ready">*</sup>
@@ -27,7 +27,7 @@ There are many unfinished articles in this repo. Feel free to contribute or crea
      
 ## Top Contributors ✨
 
-Thanks goes to these wonderful people:
+<!-- Thanks goes to these wonderful people:
 
 <table href = "#contributors">
   <tr>
@@ -39,12 +39,12 @@ Thanks goes to these wonderful people:
     <td align="center"><a href="https://github.com/kartikay101"><img src="https://avatars0.githubusercontent.com/u/21268943?v=4" width="100px;" alt="Kartikay Shandil "/><br /><sub><b>Kartikay Shandil </b></sub></a><br /><a href="https://github.com/rishabh115/Interview-Questions/commits?author=kartikay101" title="Code">💻</a></td>
     <td align="center"><a href="https://tanaytoshniwal.me"><img src="https://avatars3.githubusercontent.com/u/19304171?v=4" width="100px;" alt="Tanay Toshniwal"/><br /><sub><b>Tanay Toshniwal</b></sub></a><br /><a href="https://github.com/rishabh115/Interview-Questions/commits?author=tanaytoshniwal" title="Code">💻</a></td>    
   </tr>
-</table>     
+</table>      -->
 
 
 Like this repo ? Contribute new questions this hacktoberfest and be a part of it. #Hacktoberfest_2019
-#### For contributing see <a href="https://github.com/rishabh115/InterviewQuestions/blob/master/CONTRIBUTING.md">Contributing guidelines</a> .
-
+<!-- #### For contributing see <a href="https://github.com/rishabh115/InterviewQuestions/blob/master/CONTRIBUTING.md">Contributing guidelines</a> .
+ -->
 ## Similar projects:
 - [Interviewee-Questions](https://github.com/alexakasanjeev/Interviewee-Questions) by [Sanjeev](https://github.com/alexakasanjeev)
 
