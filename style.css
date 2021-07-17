@@ -13,17 +13,31 @@
         background-image:url(green.webp) ;
         background-size: 78%;
         background-position: center 
+overflow:hidden;
         
 }
 ul {
 	
 	width:60%;
-	padding:0;
+	padding:1rem;
 	border: 1px solid #e7e7e7 ;
 	display: flex;
 	justify-content: center;
 	flex-wrap:wrap;
 	margin: 2% 19.2vw;
+    background: linear-gradient(
+    70deg,
+    rgba(36, 16, 0, 1) 0%,
+    rgba(0, 47, 6, 1) 9%,
+    rgba(0, 144, 133, 1) 22%,
+    rgba(0, 18, 113, 1) 38%,
+    rgba(59, 4, 199, 1) 52%,
+    rgba(72, 0, 255, 1) 66%,
+    rgba(92, 0, 107, 1) 76%,
+    rgba(228, 0, 189, 1) 84%,
+    rgba(255, 0, 78, 1) 93%,
+    rgba(172, 0, 61, 1) 100%
+  );
 
 
     }
@@ -71,3 +85,36 @@ ul {
 	border: 1px solid pink;
 
       }
+
+@media screen and (max-width: 600px) {
+  li{
+	width:13rem;
+	height:8rem;
+ 	font-size:1.2rem;
+	overflow:hidden;
+  }
+	
+  ul{
+	width:100%;
+	padding:0;
+	margin:0;
+}
+}
+
+
+@media screen and (max-width: 330px) {
+  li{
+	width:11rem;
+	height:5rem;
+ 	font-size:.84rem;
+	overflow:hidden;
+	padding:0;
+  }
+	
+  ul{
+	width:100%;
+	padding:0;
+	margin:0;
+}
+}
+
