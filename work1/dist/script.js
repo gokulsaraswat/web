@@ -1,5 +1,6 @@
-const signUpButton = document.getElementById('signUp');
-const signInButton = document.getElementById('signIn');
+
+const signUpButton = document.getElementById('slidesignUp');
+const signInButton = document.getElementById('slidesignIn');
 const container = document.getElementById('container');
 
 signUpButton.addEventListener('click', () => {
@@ -9,3 +10,7 @@ signUpButton.addEventListener('click', () => {
 signInButton.addEventListener('click', () => {
 	container.classList.remove("right-panel-active");
 });
+
+
+
+
