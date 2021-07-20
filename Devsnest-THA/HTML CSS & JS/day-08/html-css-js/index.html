@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Gokul Saraswat">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
+  <title>Pattern</title>
+</head>
+<body>
+<div class="container">
+  <div class="dot"></div>
+</div>
+<script>
+  // This is just to copy paste the html
+  // Coz I'm too lazy to do that manually
+  let container = document.querySelector(".container")
+  let html = container.innerHTML
+  container.innerHTML = ""
+  for(let i = 0; i < 20*20; i++)
+    container.innerHTML += html
+</script>
+</body>
+</html>

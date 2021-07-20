@@ -1,0 +1,164 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    /*border: 1px solid red;*/
+}
+
+html {
+    overflow: hidden;
+    overflow-y: visible;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding-top: 10px;
+    padding-bottom: 50px;
+    overflow: hidden;
+    align-items: center;
+    overflow-y: visible;
+}
+
+.score {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    height: 30px;
+    white-space: nowrap;
+    color: #666;
+    font-size: 110%;
+    /*overflow: hidden;*/
+    text-overflow: ellipsis;
+}
+
+.question-box {
+    width: 80vw;
+    position: relative;
+}
+
+.question-box .question {
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px;
+    font-size: 18px;
+    position: absolute;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: left 0.5s linear, right 0.5s linear, opacity 0.5s linear;
+}
+
+.question-box .question.right {
+    left: 100vw;
+    right: -100vw;
+}
+.question-box .question.center{
+    left: 0;
+    right: 0;
+    opacity: 1;
+}
+.question-box .question.left {
+    left: -100vw;
+    right: 100vw;
+}
+
+.question-box .question .text {
+    padding: 10px;
+    margin-bottom: 5px;
+    /*border: 1px solid;*/
+}
+
+.question-box .question .options .option{
+    padding: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.question-box .question .options .option:hover{
+    background: rgba(0,0,0,0.04);
+}
+
+.question-box .question .options .option.right{
+    background: rgba(0, 255, 0, 0.5);
+ }
+
+.question-box .question .options .option.wrong{
+      background: rgba(255, 0, 0, 0.5);
+}
+
+.controller {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    background: white;
+    padding-bottom: 10px;
+}
+
+.controller div{
+    display: inline-block;
+    align-self: flex-start;
+    margin: auto;
+    padding: 7px 10px;
+    border-radius: 5px;
+    border: 2px solid;
+    color: #888888;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.controller div.disabled {
+    opacity: 0.6;
+}
+
+@media all and (min-width: 1000px){
+    .question-box {
+        width: 800px;
+    }
+}
+
+@media all and (max-width: 750px){
+    .question-box {
+        width: 600px;
+    }
+}
+
+
+@media all and (max-width: 600px){
+    .question-box {
+        width: 100vw;
+    }
+    .question-box .question {
+        font-size: 17px;
+        /*box-shadow: none;*/
+        border-radius: 0;
+    }
+}
+
+@media all and (max-width: 500px){
+    .question-box .question {
+        font-size: 16px;
+    }
+}
+
+@media all and (max-width: 400px){
+    .question-box .question {
+        font-size: 15px;
+    }
+}
+
+@media all and (max-width: 300px){
+    .question-box .question {
+        font-size: 14px;
+    }
+}

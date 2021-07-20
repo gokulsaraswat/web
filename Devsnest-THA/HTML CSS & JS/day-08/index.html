@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="author" content="Gokul Saraswat">
+    <title>FrontEnd</title>
+</head>
+<body>
+<ul id="listElement">
+</ul>
+</body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        /*border: 0.1px solid red;*/
+        box-sizing: border-box;
+    }
+    body {
+        font-size: 150%;
+    }
+    ul {
+
+    }
+    li {
+        background: lightgoldenrodyellow;
+        padding: 5px;
+        border-bottom: 1px solid #777;
+    }
+    li::marker{
+        content: "";
+    }
+    a {
+        color: #999;
+        text-decoration: none;
+        display: block;
+        /*width: calc(100% - 14px);*/
+        /*margin-left: 7px;*/
+        padding: 6px 10px;
+    }
+    a:hover {
+        background: rgba(255, 255, 0, 0.2);
+    }
+</style>
+<script>
+    const list = ["..", "html-css-only", "html-css-js"]
+
+    for(let item of list){
+        let li = document.createElement("li")
+        let link = document.createElement("a")
+        link.href = item
+        link.innerHTML = "&#128193; " + item
+        li.append(link)
+        listElement.append(li)
+    }
+</script>
+</html>

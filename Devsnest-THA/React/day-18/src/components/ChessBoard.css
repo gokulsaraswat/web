@@ -1,0 +1,10 @@
+.chess-board {
+    border: 5px solid black;
+    display: grid;
+    grid-template: repeat(8, auto)/ repeat(8,auto);
+}
+
+.chess-board div {
+    height: 20px;
+    width: 20px;
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="author" content="Gokul Saraswat">
+    <title>Blah!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- <canvas id="c"></canvas> -->
+<ul id="listElement">
+</ul>
+</body>
+<script>
+    const list = ["HTML CSS & JS", "React"]
+
+    for(let item of list){
+        let li = document.createElement("li")
+        let link = document.createElement("a")
+        link.href = item
+        link.innerHTML = "&#128193; " + item
+        li.append(link)
+        listElement.append(li)
+    }
+</script>
+</html>

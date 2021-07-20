@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    box-sizing: border-box;
+    /*border: 1px solid red;*/
+}
+
+body {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+}
+
+.page {
+    display: inline-block;
+    /*text-shadow: 0 0 2px;*/
+    width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    position: relative;
+    color: #666;
+    top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 40px;
+}
+
+.wrapper {
+    position: relative;
+    top: 30px;
+    /*height: 95vh;*/
+    left: 2%;
+    width: 96%;
+    border: 1px solid #888;
+    padding-bottom: 10px;
+}
+
+.title {
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    display: inline-block;
+    background: white;
+    padding: 5px 20px;
+    position: relative;
+}
+
+.content {
+    display: flex;
+    /*overflow: auto;*/
+    height: 9%;
+    text-align: left;
+    margin-top: -20px;
+}
+
+.content .half {
+    width: 50%;
+    border: none;
+    padding: 10px;
+}
+
+.content .half:first-child {
+    border-right: 1px solid;
+}
+
+.content .half:last-child {
+    border-left: 1px solid;
+}
+
+.content .half .section {
+    margin-bottom: 20px;
+}
+
+.content .half .section h4 {
+    padding: 5px 0;
+}
+
+.content .half .section ul{
+    padding-left: 20px;
+}
+
+.content .half .section ul li{
+     padding-top: 5px;
+ }

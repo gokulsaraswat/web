@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.section {
+    border: 1px solid green;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.wrapper {}
+
+input {
+    color: #00adff;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid;
+    width: 100%;
+}
+
+input::placeholder {
+    color: transparent;
+}
+
+input:focus::placeholder {
+    color: rgba(0,0,0, 0.3);
+}
+
+input + label {
+    display: inline-block;
+    color: #00adff;
+    transform: translate(10px, -30px);
+    line-height: 25px;
+    font-size: 20px;
+    transition: all 0.3s linear;
+    cursor: text;
+}
+
+input:focus + label, input:not(:placeholder-shown) + label{
+    transform: translate(0, -50px);
+    font-size: 10px;
+}
+
+output {
+    display: block;
+    padding: 0 20px 20px;
+    color: #00adff;
+    text-align: center;
+}
+
+.wrapper:last-child {
+    word-spacing: 10px;
+}
+
+button {
+    padding: 10px;
+    width: 100px;
+    border-radius: 100%;
+    background: none;
+    border: 1px solid;
+}
+
+button {
+    box-shadow: 1px 1px 3px;
+}
+
+button:active{
+    box-shadow: 0px 0px 3px;
+}
+
+button:first-child {
+    color: red;
+}
+
+button:nth-child(2) {
+    color: green;
+}
+
+button:nth-child(3) {
+    color: blue;
+}
+
+button:last-child {
+    color: brown;
+}

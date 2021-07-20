@@ -1,0 +1,117 @@
+:root{
+    --len: 1vw;
+    --hour:0;
+    --minute:0;
+    --second:0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    /*border: 1px solid red;*/
+}
+
+html {
+    border: none;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    height: 100vh;
+}
+
+.clock {
+    position: relative;
+    height: calc(var(--len)*100);
+    width: calc(var(--len)*100);
+    justify-content: center;
+    align-items: center;
+}
+
+.clock * {
+    position: absolute;
+}
+
+.clock .frame {
+    height: 90%;
+    width: 90%;
+    left: 5%;
+    top: 5%;
+    border-radius: 100%;
+    border: calc(var(--len)*0.7) solid rgba(200, 200, 200, 0.2);
+    box-shadow: var(--len) var(--len) calc(var(--len)*5) rgba(0,0,0,0.2), inset var(--len) var(--len) calc(var(--len)*4) rgba(0,0,0,0.2);
+}
+
+.clock .frame .dot {
+    top: 48%;
+    height: 4%;
+    width: 4%;
+    left: 48%;
+    background: #ddd;
+    border-radius: 100%;
+    box-shadow: calc(var(--len)*0.2) calc(var(--len)*0.2) calc(var(--len)*2) rgba(0, 0, 0, 0.2);
+}
+
+.clock .frame .dial {
+    border-radius: 100px;
+    transform-origin: left center;
+    left: 50%;
+    box-shadow: 0 0 calc(var(--len)*2) rgba(0,0,0,0.2);
+    opacity: 0.4;
+}
+
+.clock .frame .marker-h, .clock .frame .marker-m{
+    border-radius: 100px;
+    transform-origin: left center;
+    left: 50%;
+    /*background: red;*/
+    border-right: calc(var(--len)*2) solid #bbb;
+    width: calc(var(--len)*42);
+    height: calc(var(--len)*0.4);
+    top: calc(50% - var(--len));
+    transform: rotate(calc(30deg * var(--h)));
+}
+
+.clock .frame .marker-m {
+    border-right: calc(var(--len)*1.2) solid #bbb;
+    height: calc(var(--len)*0.3);
+    transform: rotate(calc(6deg * var(--m)));
+}
+
+.clock .frame .second {
+    height: var(--len);
+    width: calc(var(--len)*40);
+    background: red;
+    transform: rotate(calc(1deg * var(--second) * 360 / 60 - 90deg));
+    top: calc(50% - var(--len)*0.5);
+    left: 50%;
+}
+
+.clock .frame .minute {
+    height: calc(var(--len)*1.5);
+    width: calc(var(--len)*35);
+    background: green;
+    transform: rotate(calc(1deg * var(--minute) * 360 / 60 - 90deg));
+    top: calc(50% - var(--len)*0.75);
+    left: 50%;
+}
+
+.clock .frame .hour {
+    height: calc(var(--len)*2);
+    width: calc(var(--len)*30);
+    background: blue;
+    transform: rotate(calc(1deg * var(--hour) * 360 / 12 - 90deg));
+    top: calc(50% - var(--len));
+    left: 50%;
+}
+
+@media all and (orientation: landscape) {
+    :root {
+        --len: 1vh;
+    }
+}

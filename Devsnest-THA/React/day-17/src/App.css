@@ -1,0 +1,23 @@
+
+.calorie-list {
+  border: 2px solid #00adff;
+  max-height: 90vh;
+  overflow: auto;
+  border-radius: 10px;
+  color: #007e9e;
+}
+
+.calorie-list .calorie-card {
+  margin: 10px;
+  border: 1px solid #00adff;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.calorie-list .calorie-card .name {
+  font-size: 20px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

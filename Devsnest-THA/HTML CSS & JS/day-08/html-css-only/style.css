@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cell-length: 20px;
+    --row-count: 20;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(var(--row-count) * var(--cell-length));
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.container input[type=checkbox] {
+    display: none;
+}
+
+.container label .dot, .container label {
+    display: inline-block;
+    height: var(--cell-length);
+    width: var(--cell-length);
+    background: red;
+    box-shadow: inset calc(var(--cell-length)/40) calc(var(--cell-length)/40) 0 white, inset calc(var(--cell-length)/40) calc(var(--cell-length)/40) 0 white;
+}
+
+.container input[type=checkbox]:checked + div{
+    background: black;
+}

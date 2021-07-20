@@ -1,0 +1,26 @@
+.chess-board-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.chess-board {
+    border: 10px solid black;
+    padding: 1px;
+}
+
+.chess-board .chess-board-row {
+    display: grid;
+    grid-template-columns: repeat(8, auto);
+}
+
+.chess-board .chess-board-row .cell {
+    height: 20px;
+    width: 20px;
+}
+
+.chess-board-row:nth-child(odd) .cell:nth-child(even),
+.chess-board-row:nth-child(even) .cell:nth-child(odd) {
+    background: black;
+}

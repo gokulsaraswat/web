@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /*border: 1px solid red; !* debugging *!*/
+}
+
+body {
+    perspective: 3000px;
+    perspective-origin: 50vh 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.status {
+    font-size: 150%;
+    color: green;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 765px;
+    justify-content: center;
+    align-items: center;
+}
+
+.cards .card {
+    height: 200px;
+    width: 170px;
+    margin: 10px;
+    overflow: visible;
+    /*box-shadow: 0 0 5px rgba(0,0,0,0.5);*/
+}
+
+.cards .card .card-inner {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    transition: all 1s;
+    transform-style: preserve-3d;
+}
+
+.cards .card .clicked {
+    transform: rotateY(180deg);
+}
+
+.cards .card .card-inner .card-front {
+    background: green;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.cards .card .card-inner .card-back {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    transform: rotateY(-180deg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: 0 0;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="author" content="Gokul saraswat">
+    <title>FrontEnd</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<ul id="listElement">
+</ul>
+</body>
+
+<script>
+    const list = [
+        "day-01", "day-02", "day-03", "day-04", "day-05",
+        "day-06", "day-07", "day-08", "day-09", "day-10",
+        "day-11", "day-12", "day-13"
+    ]
+
+    let li = document.createElement("li")
+    let link = document.createElement("a")
+    link.href = ".."
+    link.innerHTML = "&#128194; .."
+    li.append(link)
+    listElement.append(li)
+
+    for(let item of list){
+        let li = document.createElement("li")
+        let link = document.createElement("a")
+        link.href = item
+        link.innerHTML = "&#128193; " + item
+        li.append(link)
+        listElement.append(li)
+    }
+</script>
+</html>

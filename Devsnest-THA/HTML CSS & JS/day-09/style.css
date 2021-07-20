@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /*border: 1px solid red;*/
+}
+
+body {
+    min-height: 100vh;
+    text-align: center;
+    background: #ebd4cb;
+}
+
+.screen {
+    background: #2c0703;
+    width: 70vw;
+    height: 20px;
+    border-radius: 20px 20px 0 0;
+    display: inline-block;
+}
+
+.status {
+    color: black;
+    height: 70px;
+    line-height: 50px;
+}
+
+.seats {
+    width: 90vw;
+    display: inline-block;
+}
+
+.seats .seats-inner {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 1vw;
+    padding: 1vw;
+    background: #c24a2cc7;
+}
+
+.seats .seats-inner .seat {
+    height: 50px;
+    background: #793322c7;
+}
+
+.seats .seats-inner .seat:hover {
+    background: #521607c7;
+}
+
+.seats .seats-inner .booked {
+    background: #521607c7;
+}

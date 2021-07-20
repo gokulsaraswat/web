@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /*border: 1px solid red;*/
+}
+
+body {
+    text-align: center;
+}
+
+.container {
+    display: inline-block;
+    text-align: left;
+}
+
+.container > div > div > div{
+    padding-left: 20px;
+}
+
+.avatar {
+    text-align: center;
+}
+
+.avatar .wrap {
+    border-radius: 100%;
+    overflow: hidden;
+    display: inline-block;
+    height: 250px;
+    width: 250px;
+}
+
+.avatar .wrap img {
+    height: 250px;
+    width: 250px;
+}
+
+.avatar .name a {
+    text-decoration: none;
+    font-size: 150%;
+}
+
+.repos {
+    padding: 10px;
+}
+
+.repos .heading, .followers .count {
+    text-align: center;
+    font-size: 20px;
+    color: #666;
+    border-bottom: 2px solid #999;
+    margin: 10px 40px 20px 40px;
+    padding-bottom: 10px;
+}
+
+.repos .list, .followers .list {
+    /*border-bottom: 1px solid #aaa;*/
+    padding: 10px;
+}
+
+.repos .list > div, .followers .list div {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: 10px;
+    padding-bottom: 15px;
+}
+
+.repos .list div a {
+    text-decoration: none;
+    color: #0088bb;
+    font-size: 120%;
+}
+
+.repos .list div .desc {
+    margin: 10px 0;
+    font-size: 110%;
+    color: #0055bb;
+}
+
+.repos .list div div span {
+    border-radius: 10px;
+    background: rgba(77, 180, 245, 0.45);
+    padding: 5px;
+    margin: 5px;
+    color: #0576cc;
+}
+
+.followers .count {
+    text-align: center;
+}
+
+.followers .list div a{
+    font-size: 110%;
+    text-decoration: none;
+    color: #2f80e5;
+}
