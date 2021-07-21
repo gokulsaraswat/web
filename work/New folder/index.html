@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    
+	<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+	<script src="scirpt.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>
+          <h1 style="font-size:100px">Food Bay</h1>
+          <h3>Login with EmailID</h3>
+            </td>
+          </tr>
+          <tr>
+            <td>\  <label>Email ID:</label>
+              <input type="email" placeholder="email" id="email"/>
+            
+                </td>
+              </tr>
+              <tr>
+               <td>
+                 <label>Enter Password:</label>
+                 <input type="password" placeholder="password" id="password"/>
+                 <button onclick="signUp()" id="signUp"> SignUp </button>
+	              	<button onclick="signIn()" id="signIn"> Login </button>
+		<button onclick="signOut()" id="signUp">Log Out</button>
+               </td>
+              </tr>
+        </table>
+  </body>
+
+  
+</html>
