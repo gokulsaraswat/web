@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="author" content="Gokul Saraswat">
     <title>Blah!</title>
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <!-- <canvas id="c"></canvas> -->
@@ -14,12 +14,12 @@
 </ul>
 </body>
 <script>
-    const list = ["01 - JavaScript Drum Kit","02 - JS and CSS Clock","03 - CSS Variables","04 - Array Cardio Day 1","05 - Flex Panel Gallery","Type Ahead","07 - Array Cardio Day 2","08 - Fun with HTML5 Canvas","09 - Dev Tools Domination","10 - Hold Shift and Check Checkboxes","","","","","","","","","","","","","","","","","","","","","","","",]
+    const list = ["10in1hour", "12in12hours", "30onlyjs"]
 
     for(let item of list){
         let li = document.createElement("li")
         let link = document.createElement("a")
-        link.href = item+"/index-FINISHED.html"
+        link.href = item
         link.innerHTML = "&#128193; " + item
         li.append(link)
         listElement.append(li)
