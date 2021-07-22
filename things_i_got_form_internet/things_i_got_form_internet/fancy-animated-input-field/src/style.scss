@@ -1,0 +1,150 @@
+@import 'https://fonts.googleapis.com/css?family=Lobster';
+@import 'https://fonts.googleapis.com/css?family=Lato';
+
+$inputWidth: 400px;
+$inputHeight: 40px;
+$animationColor: #F54E4E;
+
+body {
+    background-color: #589DB0;  
+}
+
+.center {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: $inputWidth + 170;
+    height: $inputHeight;
+}
+
+.input {
+    height: $inputHeight;
+    width: $inputWidth;
+    background-color: white;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.textZone {
+    position: absolute;
+    top: 0.125 * $inputHeight;
+    padding-left: 0.2 * $inputHeight;
+    width: $inputWidth - (0.2 * $inputHeight);
+    height: 0.75 * $inputHeight;
+    outline: none;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: text;
+}
+
+.cursor {
+    width: 1px;
+    height: 100%;
+    background-color: #222222;
+    display: inline-block;
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;  
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.character, .placeholder {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    font-family: 'Lobster', sans-serif;
+    font-size: 0.6 * $inputHeight;
+    color: #555555;
+}
+
+.placeholder {
+    color: #BFBFBF;
+}
+
+.space {
+    display: inline-block;
+    width: 0.3 * 0.6 * $inputHeight;
+    height: 100%;
+}
+
+@keyframes blink {
+    0% {opacity: 1;}
+    50% {opacity: 0;}
+}
+
+@keyframes colorTransition {
+    0% {color: #555555;}
+    50% {color: $animationColor;}
+    75% {color: #444444;}
+    100% {color: #555555;}
+}
+
+.selector {
+    width: 150px;
+    margin-right: 10px;
+    height: $inputHeight;
+    border: 1px white solid;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    line-height: $inputHeight;
+    color: white;
+    border-radius: 5px;
+    font-family: 'Lato', sans-serif;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;  
+    -khtml-user-select: none;    
+    -moz-user-select: none;      
+    -ms-user-select: none;       
+    user-select: none; 
+    cursor: ns-resize;
+}
+
+.selection {
+    animation-duration: 100ms;
+}
+
+.upArrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 5px 10px 5px;
+    position: absolute;
+    top: -20px;
+    left: 72.5px;
+    cursor: pointer;
+}
+
+.downArrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 5px 0 5px;
+    position: absolute;
+    bottom: -22px;
+    left: 72.5px;
+    cursor: pointer;
+}
+
+.upWhiteArrow {
+    border-color: transparent transparent #ffffff transparent;
+}
+
+.upGreyArrow {
+    border-color: transparent transparent #777777 transparent;
+}
+
+.downWhiteArrow {
+    border-color: #ffffff transparent transparent transparent;
+}
+
+.downGreyArrow {
+    border-color: #777777 transparent transparent transparent;
+}

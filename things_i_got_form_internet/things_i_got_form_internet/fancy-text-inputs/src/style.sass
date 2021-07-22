@@ -1,0 +1,115 @@
+@import compass
+
+$red: rgba(255,74,86,1)
+.transition
+  @include transition( all 0.25s cubic-bezier(.53,.01,.35,1.5))
+
+*
+  font-family: Helvetica , sans-serif
+  font-weight: light
+  -webkit-font-smoothing: antialiased
+    
+html
+  background-color: $red //rgba(245,248,252,1)
+
+form
+  position: relative
+  display: inline-block
+  max-width: 700px
+  min-width: 500px
+  box-sizing: border-box
+  padding: 30px 25px
+  background-color: white
+  border-radius: 40px
+  margin: 40px 0
+  left: 50%
+  @include translate( -50% , 0 )
+    
+  h1
+    color: $red
+    font-weight: 100
+    letter-spacing: 0.01em
+    margin-left: 15px
+    margin-bottom: 35px
+    text-transform: uppercase
+      
+  button
+    @extend .transition
+    margin-top: 35px
+    background-color: white
+    border: 1px solid $red
+    line-height: 0
+    font-size: 17px
+    display: inline-block
+    box-sizing: border-box
+    padding: 20px 15px 
+    border-radius: 60px
+    color: $red
+    font-weight: 100
+    letter-spacing: 0.01em
+    position: relative
+    z-index: 1
+    
+    &:hover , &:focus
+      color: white
+      background-color: $red
+    
+  .question
+    position: relative
+    padding: 10px 0
+    
+    &:first-of-type
+      padding-top: 0
+      
+    &:last-of-type
+      padding-bottom: 0
+      
+    label
+      @extend .transition
+      transform-origin: left center
+      color: $red
+      font-weight: 100
+      letter-spacing: 0.01em
+      font-size: 17px
+      box-sizing: border-box
+      padding: 10px 15px
+      display: block
+      position: absolute
+      margin-top: -40px
+      z-index: 2
+      pointer-events: none
+      
+    input[type="text"]
+      @extend .transition
+      appearance: none
+      background-color: none
+      border: 1px solid $red
+      line-height: 0
+      font-size: 17px
+      width: 100%
+      display: block
+      box-sizing: border-box
+      padding: 10px 15px
+      border-radius: 60px
+      color: $red
+      font-weight: 100
+      letter-spacing: 0.01em
+      position: relative
+      z-index: 1
+      
+      &:focus
+        outline: none
+        background: $red
+        color: white
+        margin-top: 30px
+        
+      &:valid
+        margin-top: 30px
+          
+      &:focus ~ label
+        @include translate( 0 , -35px )
+      
+      &:valid ~ label
+        text-transform: uppercase
+        font-style: italic
+        @include transform( translate( 5px , -35px ) scale(0.6))

@@ -1,0 +1,239 @@
+@import url("https://fonts.googleapis.com/css?family=Bitter:400,400i,700|Montserrat:300,400,700");
+@import url(//fonts.googleapis.com/icon?family=Material+Icons);
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1rem;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: "liga";
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-wieght: 300;
+  color: #404040;
+}
+
+.container {
+  display: flex;
+  width: 50rem;
+  height: 40rem;
+  margin: 2rem auto;
+}
+
+.photo {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+.photo img {
+  width: auto;
+  height: 100%;
+}
+.photo-mode {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: #0099cc;
+  background-image: url("https://images.unsplash.com/photo-1439853949127-fa647821eba0?dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb");
+  background-size: auto 100%;
+}
+.photo-mode--multiply, .photo-mode--overlay, .photo-mode--darken, .photo-mode--lighten, .photo-mode--exclusion, .photo-mode--difference, .photo-mode--screen, .photo-mode--luminosity {
+  display: block;
+}
+.photo-mode--multiply {
+  background-blend-mode: multiply;
+}
+.photo-mode--overlay {
+  background-blend-mode: overlay;
+}
+.photo-mode--darken {
+  background-blend-mode: darken;
+}
+.photo-mode--lighten {
+  background-blend-mode: lighten;
+}
+.photo-mode--exclusion {
+  background-blend-mode: exclusion;
+}
+.photo-mode--difference {
+  background-blend-mode: difference;
+}
+.photo-mode--screen {
+  background-blend-mode: screen;
+}
+.photo-mode--luminosity {
+  background-blend-mode: luminosity;
+}
+
+.filter {
+  flex: 1;
+  padding: 1rem;
+  background: #f0f8ff;
+}
+.filter-item {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: calc(100% / 8);
+}
+.filter-item label {
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: #404040;
+}
+.filter-item i {
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  margin-right: 1.5rem;
+  color: #404040;
+}
+.filter-item input {
+  width: calc(100% - 3rem);
+  margin: 0;
+}
+.filter .modes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-right: -1rem;
+}
+.filter .modes-item {
+  cursor: pointer;
+  width: 4rem;
+  height: 4rem;
+  margin: 0 1rem 1rem 0;
+  border-radius: 100%;
+  background-color: #0099cc;
+  background-image: url("https://images.unsplash.com/photo-1439853949127-fa647821eba0?dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.filter .modes-item--multiply {
+  background-blend-mode: multiply;
+}
+.filter .modes-item--overlay {
+  background-blend-mode: overlay;
+}
+.filter .modes-item--darken {
+  background-blend-mode: darken;
+}
+.filter .modes-item--lighten {
+  background-blend-mode: lighten;
+}
+.filter .modes-item--exclusion {
+  background-blend-mode: exclusion;
+}
+.filter .modes-item--difference {
+  background-blend-mode: difference;
+}
+.filter .modes-item--screen {
+  background-blend-mode: screen;
+}
+.filter .modes-item--luminosity {
+  background-blend-mode: luminosity;
+}
+
+/* Range Inputs Style */
+input[type=range]:invalid {
+  box-shadow: none;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  background: transparent;
+  -webkit-margin: -1rem 0 0 0;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  cursor: pointer;
+  background: #e1e1e1;
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::-ms-track {
+  cursor: pointer;
+  background: #e1e1e1;
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type=range]::-moz-range-track {
+  cursor: pointer;
+  background: #e1e1e1;
+  border-color: transparent;
+  color: transparent;
+  border-radius: 1.3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  border-radius: 100%;
+  height: 1.5rem;
+  width: 1.5rem;
+  background: #ffffff;
+  cursor: pointer;
+  background: #c6e2ff;
+  border: 0;
+  margin-top: -0.75rem;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  height: 2px;
+  cursor: pointer;
+  background: #e1e1e1;
+  border-radius: 1.3px;
+  margin-top: -1rem;
+}
+
+/* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+  border-radius: 100%;
+  height: 1.5rem;
+  width: 1.5rem;
+  background: #ffffff;
+  cursor: pointer;
+  background: #c6e2ff;
+  border: 0;
+}
+
+input[type=range]::-moz-focus-outer {
+  border: 0;
+}
+
+@-moz-document url-prefix() {
+  input[type=range] {
+    position: relative;
+    top: 0.3rem;
+  }
+}
