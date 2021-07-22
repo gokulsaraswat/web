@@ -45,7 +45,7 @@ var Application = (function () {
             stage: this.stage,
             image: "https://rwatggcdn.blob.core.windows.net/cdn/codepens/cp-5-01.jpg",
             index: this.transitions.length,
-            zoom: 4
+            zoom: 8
         }));
         this.transitions.push(new Transition({
             renderer: this.renderer,
