@@ -31,3 +31,4 @@ git pull or merge
 | Google Analytics | [plugins/googleanalytics/README.md][PlGa] | -->
 
 > Note: `--install-bootstrap SYS-ADMIN` is not a solution required considered juggad.
+> [Click Me](https://gokulsaraswat.github.io/web)
