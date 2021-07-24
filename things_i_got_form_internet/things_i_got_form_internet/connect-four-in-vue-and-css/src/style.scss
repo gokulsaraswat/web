@@ -1,0 +1,317 @@
+$yellow: #ffd100;
+$orange: #ff6a13;
+$lightBlue: #7ba7bc;
+$lightGray: #a7a8aa;
+$darkGray: #53565a;
+$white: #fff;
+$red: #e4002b;
+
+$breakpoint: 40rem;
+$unit: 3vmin;
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+	font-family: inherit;
+	color: inherit;
+	position: inherit;
+}
+
+*:focus {
+	outline: 0.15rem dotted $orange;
+	outline-offset: 0.15rem;
+}
+
+[hidden] {
+	display: none !important;
+}
+
+body {
+	font-family: "Baloo Chettan 2";
+	margin: 0;
+	min-height: 100vh;
+	box-sizing: border-box;
+	color: $darkGray;
+	font-size: 2rem;
+	position: relative;
+}
+
+.red,
+.yellow {
+	text-transform: capitalize;
+	margin-right: 0.1em;
+}
+
+.red {
+	color: $red;
+}
+
+.yellow {
+	color: $yellow;
+}
+
+button {
+	cursor: pointer;
+}
+
+#game {
+	width: 100%;
+	padding: 1rem;
+	margin: auto;
+	min-height: 100vh;
+
+	@media (min-width: $breakpoint) {
+		max-width: 76vmin;
+		padding: 0;
+		padding-top: 10vmin;
+		min-height: calc(100vh - 10vmin);
+	}
+
+	.flex {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+
+		p {
+			font-size: calc(1rem + 3vmin);
+			margin: 0;
+		}
+
+		button {
+			font-size: 1rem;
+			padding: 0.25rem 0.5rem;
+			border-radius: 4px;
+			border: 2px solid $lightGray;
+
+			&:disabled {
+				opacity: 0.5;
+				cursor: not-allowed;
+			}
+
+			&:not(:disabled):hover {
+				filter: brightness(0.9);
+			}
+		}
+	}
+}
+
+#button-board {
+	display: none;
+	grid-template-columns: repeat(8, 1fr);
+	grid-gap: $unit * 0.666;
+	padding: $unit $unit 0;
+
+	@media (min-width: $breakpoint) {
+		display: grid;
+	}
+
+	[data-column] {
+		position: relative;
+	}
+
+	button {
+		padding: $unit 0;
+		border: 0;
+		text-align: center;
+		width: 100%;
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		background: transparent;
+
+		span {
+			height: 0;
+			border-left: 1vmin solid transparent;
+			border-right: 1vmin solid transparent;
+			border-bottom: none;
+			border-top: 1vmin solid $lightGray;
+			text-align: center;
+			pointer-events: none;
+			display: block;
+
+			&::after {
+				content: "";
+				width: 4vmin;
+				height: 4vmin;
+				border-radius: 4vmin;
+				border: 3px solid $lightGray;
+				left: -2vmin;
+				top: -2.7vmin;
+				display: block;
+				position: absolute;
+			}
+		}
+
+		&:focus,
+		&:hover {
+			outline: none;
+
+			& + .slot {
+				display: block;
+				left: 0;
+				z-index: 2;
+				pointer-events: none;
+				position: absolute;
+				bottom: $unit * 0.333;
+
+				&:before {
+					content: "👇";
+					position: absolute;
+					font-size: calc(1rem + 3vmin);
+					width: 90%;
+					left: 0;
+					top: -0.8em;
+					text-align: center;
+					z-index: 2;
+				}
+
+				div {
+					animation: none;
+					z-index: 1;
+					box-shadow: -0.1rem -0.1rem 1px rgba($white, 0.2) inset;
+
+					&:before {
+						box-shadow: -0.1rem -0.1rem 1px rgba($white, 0.2) inset,
+							0.2rem 0.2rem 0.3rem rgba($darkGray, 0.2) inset;
+					}
+				}
+			}
+		}
+	}
+
+	.slot {
+		position: absolute;
+		top: 0;
+		display: none;
+	}
+}
+
+#board {
+	margin: auto;
+	display: grid;
+	grid-gap: $unit;
+	grid-template-columns: repeat(8, 1fr);
+	justify-content: center;
+	overflow: hidden;
+	border-radius: 0.25rem;
+	padding: $unit;
+	background: $lightBlue;
+	mix-blend-mode: multiply;
+	box-shadow: 0.2rem 0.3rem 0.4rem rgba($darkGray, 0.3),
+		-0.25rem -0.25rem 0.25rem rgba(darken($lightBlue, 10%), 0.5) inset,
+		0.25rem 0.25rem 0.25rem rgba(lighten($lightBlue, 10%), 0.8) inset;
+
+	@media (min-width: $breakpoint) {
+		grid-gap: $unit * 0.666;
+	}
+}
+
+.slot {
+	width: $unit * 2.666;
+	height: $unit * 2.666;
+	background: $white;
+	border-radius: $unit * 2.666;
+	padding: 0;
+	border: none;
+	margin: auto;
+
+	@media (min-width: $breakpoint) {
+		width: $unit * 2.333;
+		height: $unit * 2.333;
+	}
+
+	&.shadow {
+		box-shadow: 0.15rem 0.15rem 1px rgba(lighten($lightBlue, 15%), 0.5),
+			-0.15rem -0.15rem 1px rgba(darken($lightBlue, 15%), 0.5),
+			0.2rem 0.2rem 0.2rem rgba($darkGray, 0.3) inset;
+	}
+
+	.red,
+	.yellow {
+		width: inherit;
+		height: inherit;
+		border-radius: inherit;
+		border: none;
+		pointer-events: none;
+		box-shadow: -0.1rem -0.1rem 1px rgba($white, 0.2) inset,
+			0.1rem 0.1rem 1px rgba($darkGray, 0.2) inset,
+			0.2rem 0.2rem 0.3rem rgba($darkGray, 0.3) inset;
+		position: relative;
+		font-size: 4vmin;
+		line-height: 7.2vmin;
+		text-align: center;
+		color: rgba(0, 0, 0, 0.4);
+
+		&.loser {
+			filter: opacity(0.7) grayscale(60%) contrast(0.4);
+		}
+
+		&:before {
+			content: "";
+			width: 70%;
+			height: 70%;
+			border-radius: inherit;
+			box-shadow: inherit;
+			left: 15%;
+			top: 15%;
+			position: absolute;
+		}
+	}
+
+	.red {
+		background: $red;
+	}
+
+	.yellow {
+		background: $yellow;
+	}
+}
+
+#winner-burst {
+	$timing: 0.7s;
+	transition: all $timing ease;
+	width: 150vmax;
+	height: 150vmax;
+	border-radius: 75vmax;
+	position: absolute;
+	left: calc(50% - 75vmax);
+	z-index: 3;
+	top: calc(50% - 75vmax);
+	transform-origin: center;
+	transform: scale(0);
+	pointer-events: none;
+
+	&.red {
+		background-color: $red;
+	}
+
+	&.yellow {
+		background-color: $yellow;
+	}
+
+	&.burst {
+		transform: scale(1);
+		animation: fadeOut $timing ease forwards;
+		animation-delay: $timing;
+	}
+}
+
+@keyframes drop {
+	from {
+		transform: translateY(-54vmin);
+	}
+	to {
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}

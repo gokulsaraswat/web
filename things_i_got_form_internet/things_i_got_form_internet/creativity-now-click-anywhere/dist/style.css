@@ -1,0 +1,84 @@
+:root {
+  --purple: #e8cbf9;
+  --grey: #2b2b2b;
+  --seagreen: #61a69f;
+  --beige: #c6a49b;
+  --lightgrey: #c8c3c2;
+  --lightbeige: #e0c6bf;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--lightbeige);
+  transition: background 250ms ease-in;
+  font-size: 16px;
+  font-family: Arial;
+}
+
+#scene-container {
+  position: absolute;
+}
+
+#credits {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-transform: none;
+  text-decoration: none;
+  color: black;
+  padding: 0.35rem 0.5rem;
+  margin: 0.75rem 0.75rem;
+  font-size: 0.75rem;
+  border: 1.5px solid black;
+  transition: background 200ms ease-in;
+  border-radius: 0.2rem;
+  opacity: 0;
+}
+
+#credits:hover {
+  background: rgba(255, 235, 195, 0.8);
+  background: #fff1bc;
+  background: rgba(255, 251, 215, 0.8);
+}
+
+
+a[title]:hover::after {
+  background: purple;
+}
+
+#svg-doodle {
+  position: absolute;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100%;
+  max-height: 100vh;
+  display: block;
+  margin: auto;
+  z-index: -1;
+  opacity: 0;
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  
+  0% { opacity: 0.0; }
+  85% { opacity: 0.0; }
+  100% { opacity: 1; }
+
+}
+
+@media(max-width: 800px) {
+  
+  #credits {
+    padding: 0.25rem 0.4rem;
+    margin: 0.5rem 0.5rem;
+    border: 1px solid black;
+    bottom: auto;
+    right: 0;
+  }
+  
+}

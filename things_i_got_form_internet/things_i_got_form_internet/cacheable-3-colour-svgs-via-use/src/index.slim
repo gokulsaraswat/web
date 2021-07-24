@@ -1,0 +1,43 @@
+// A full explanation about this approach can be found here: https://twitter.com/_AntiAlias_/status/1416989388429352961?s=20
+
+body data-theme="dark"
+
+	// Below would be shifted to an external asset (icons.svg) to be cacheable (see notes below)
+	// Refer https://codepen.io/scootman/project/editor/28a25d9b324f8b1ce54b2917b241ca14 for production ready cacheable demo
+	svg.defs xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+		defs
+			symbol id="package" viewBox="0 0 36 36"
+				g data-note="darker elements"
+					path d="M33.94,10.08A3.11,3.11,0,0,0,33.56,9L18,18l-7-4h0L27,4.72,25,3.57,9,12.8H9L2.44,9a3.11,3.11,0,0,0-.38,1.07,1.26,1.26,0,0,0,0,.27,2.64,2.64,0,0,0,0,.29V25.38a3.28,3.28,0,0,0,1.63,2.8l12.75,7.36a3.27,3.27,0,0,0,3.24,0l12.76-7.36.35-.24A3.27,3.27,0,0,0,34,25.38V10.64a2.64,2.64,0,0,0,0-.29A1.26,1.26,0,0,0,33.94,10.08Z"
+				g data-note="lighter elements" style="fill: currentcolor"
+					path d="M9,12.8,25,3.56,19.62.46a3,3,0,0,0-.78-.33A3,3,0,0,0,18.11,0a1.92,1.92,0,0,0-.24,0,3.37,3.37,0,0,0-.71.09,3.16,3.16,0,0,0-.79.33L3.62,7.82,3.38,8l-.21.17A3.18,3.18,0,0,0,2.44,9Z"
+					path d="M33.56,9a3.18,3.18,0,0,0-.73-.86L32.62,8l-.25-.16L32,7.58,27,4.72,11,14h0l7,4Z"
+					path d="M11,14v5.22a.5.5,0,0,1-.75.43l-.75-.43a1,1,0,0,1-.5-.87V12.8H9L2.44,9a3.11,3.11,0,0,0-.38,1.07,1.26,1.26,0,0,0,0,.27,2.64,2.64,0,0,0,0,.29V25.36a2.64,2.64,0,0,0,0,.29,1.26,1.26,0,0,0,0,.27,3.23,3.23,0,0,0,1.11,1.93l.21.16a2.2,2.2,0,0,0,.25.17l.81.47,11.94,6.89A3.27,3.27,0,0,0,18,36V18Z" style="opacity: 0.5"
+
+			symbol id="delivery" viewBox="0 0 36 36"
+				g data-note="darker elements"
+					path d="M35.72,5.41l-.14-.11-24.93,16,2,8.83a.92.92,0,0,0,.65.69.94.94,0,0,0,.93-.24l5.14-5.22-4-1.87Z"
+				g data-note="lighter elements" style="fill: currentcolor"
+					path d="M34.81,5.17.68,14.85A.94.94,0,0,0,.54,16.6l10.11,4.71,24.93-16A.9.9,0,0,0,34.81,5.17Z" 
+					path d="M35.72,5.41,15.34,23.5l4,1.87,6.52,3a1.87,1.87,0,0,0,2.56-1.06l7.51-21A.92.92,0,0,0,35.72,5.41Z"
+					path d="M35.72,5.41l-.14-.11-24.93,16,2,8.83a.92.92,0,0,0,.65.69l2.06-7.33Z" style="opacity: 0.5"
+
+
+	.layout
+	
+		.icons
+			button#icon-1
+				svg.icon viewBox="0 0 36 36"
+					use href="#package"
+					/ use href="https://assets.codepen.io/436544/icons.svg#package"
+					/ ^ this should work in a production environment, but in the Codepen environment you get a 'Unsafe attempt to load' error (see CodePen project link above)
+			button#icon-2.alt
+				svg.icon viewBox="0 0 36 36"
+					use href="#delivery"
+					/ use href="https://assets.codepen.io/436544/icons.svg#delivery"
+					
+		.segmented-control
+			input#light-theme type="radio" name="theme" value="light"
+			label for="light-theme" Light
+			input#dark-theme {type="radio" name="theme" value="dark" checked}
+			label for="dark-theme" Dark

@@ -1,0 +1,75 @@
+@import 'https://fonts.googleapis.com/css?family=Fira+Mono';
+
+
+html {
+	font-size: 18px;
+}
+
+body {
+	color: #333;
+	background: #f8f8f8;
+	font-family: 'Fira Mono', mono;
+	font-size: 1rem;
+	margin: 0;
+	display: grid;
+	width: 100%;
+	height: 100vh;
+	justify-items: center;
+	align-items: center;
+	padding: 0 6vw;
+	box-sizing: border-box;
+	line-height: 1.4;
+}
+
+div {
+	width: 100%;
+	max-width: 30em;
+	white-space: pre-line;
+}
+
+div:after {
+	content: '|';
+	-webkit-animation: cursor 1s linear infinite;
+	        animation: cursor 1s linear infinite;
+}
+
+button {
+	font-family: 'Fira Mono', mono;
+	padding: 1em;
+	font-size: 14px;
+	border-radius: 4px;
+	background: transparent;
+	border: 2px solid #a7a8aa;
+	color: #a7a8aa;
+	cursor: pointer;
+}
+
+@-webkit-keyframes cursor {
+	0% {
+		opacity: 0;
+	}
+	49.9% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	99.9% {
+		opacity: 1;
+	}
+}
+
+@keyframes cursor {
+	0% {
+		opacity: 0;
+	}
+	49.9% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	99.9% {
+		opacity: 1;
+	}
+}

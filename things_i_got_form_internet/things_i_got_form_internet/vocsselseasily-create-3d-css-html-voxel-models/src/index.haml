@@ -1,0 +1,323 @@
+._audio
+.l
+.p3d{"@mousemove" => "colorPicker($event)"}
+    .p3d_colorPicker{"v-if" => "picker.active", ":style" => "`background: #${picker.color};left: ${picker.x}px; top: ${picker.y}px;`", "@click" => "picker.active = !picker.active, picker.color = '#25273E'"}
+    .p3d_loader
+        .p3d_loader__inner
+            %img{:src => 'https://assets.codepen.io/217233/p3d_logoLoading_2.svg'}
+            .b
+            .f
+    .p3d_main
+        .p3d_overlay{":class" => "{open : modalOpen}", "@click" => "closeModals()"}
+        .p3d_load.modal{":class" => "{open : modalOpen && modal == 'share'}"}
+            .p3d_load__inner.modal
+                .close{"@click" => "closeModals(), enJin.audioController.play('pop6')"}
+                    X
+                %h1{"v-if" => "submitted"} Creation shared!
+                %h1{"v-if" => "!submitted"} Share your creation
+                .wrap{"v-if" => "submitted"}
+                    %p Amazing! Thanks for being part of the community. If your VoCSSel is approved, everyone will be able to view it in the community section. I really hope you enjoyed using VoCSSels!
+                .wrap{"v-if" => "!submitted"}
+                    %p Want other people to be able to load in your VoCSSel? If approved, your VoCSSel will be added to our community section.
+                    .row
+                        .row-half
+                            %label{:for => 'name'} VoCSSel name
+                            %input#name{":value" => "exportSettings.name", "v-model" => "exportSettings.name", :type => 'text'}
+                        .row-half
+                            %label{:for => 'name'} Author name
+                            %input#name{":value" => "author", "v-model" => "author", :type => 'text'}
+                .b{"v-if" => "!submitted"}
+                    %button{"@click" => "shareModel()", ":class" => "{submitting : submitting}"} 
+                        %img.loader{:src => 'https://assets.codepen.io/217233/Dual+Ring-1s-200px.gif', :draggable => 'false'}
+                        Share it
+                    %button{"@click" => "closeModals(), enJin.audioController.play('pop6')"} No thanks
+        .p3d_load.modal.community{":class" => "{open : modalOpen && modal == 'community'}"}
+            .p3d_load__inner.modal
+                .close{"@click" => "closeModals(), enJin.audioController.play('pop6')"}
+                    X
+                %h1 Community content
+                %p Take a look at some of the incredible VoCSSels people have made
+                .s-wrap
+                    .x-wrap
+                        .p3d_load__model.empty{"v-if" => "communityContent.length == 0"}
+                            %h4 Sorry, we seem to be having a problem loading content. Please try again later
+                        .p3d_load__model{":key" => "model", "v-for" => "(model, index) in communityContent", "@click" => "load(model, true), closeModals(), enJin.audioController.play('pop6')"}
+                            .m_image{":style" => "`background: url(${model.image})`"}
+                            .m_details
+                                %p.date {{model.date}}
+                                %p.name {{model.name}}
+                                %p.author by {{model.author}}
+                                %p.voxels 
+                                    %span 
+                                        {{model.voxels}}
+                                    voxels | 
+                                    %span
+                                        {{model.vertices}}
+                                    vertices
+        .p3d_load.modal{":class" => "{open : modalOpen && modal == 'load'}"}
+            .p3d_load__inner.modal
+                .close{"@click" => "closeModals(), enJin.audioController.play('pop6')"}
+                    X
+                %h1 Load a VoCSSel
+                %p Select or manage your saved VoCSSels
+                .s-wrap
+                    .p3d_load__model.empty{"v-if" => "savedModelsMeta.length == 0"}
+                        %h4 You don't have any VoCSSels saved. Go and make one first
+                    .p3d_load__model{":key" => "model", "v-for" => "(model, index) in savedModelsMeta", "@click" => "load(index, false), closeModals(), enJin.audioController.play('pop6')"}
+                        .m_image{":style" => "`background: url(${getMetaData('image', model)})`"}
+                        .m_details
+                            %p.date {{getMetaData('date', model)}}
+                            %p.name {{getMetaData('name', model)}} 
+                            %p.author by {{getMetaData('author', model)}} 
+                            %p.voxels 
+                                %span 
+                                    {{getMetaData('voxels', model)}} 
+                                voxels | 
+                                %span
+                                    {{getMetaData('vertices', model)}} 
+                                vertices
+                            .delete{"@click" => "deleteModel(index), enJin.audioController.play('pop5')"} Delete
+            
+        .p3d_main__header
+            .header_left
+                %img{:src => 'https://assets.codepen.io/217233/p3d_logo_new.svg', :draggable => 'false'}
+            .header_right
+                .name
+                    %input{":value" => "exportSettings.name", "v-model" => "exportSettings.name"}
+                .buttons
+                    .save.button{"@click" => "newModel(), enJin.audioController.play('pop6')"}
+                        %img{:src => 'https://assets.codepen.io/217233/p3d_load_1.svg', :draggable => 'false', ":class" => "{saving : saving}"}
+                            .tooltip
+                                New
+                    .save.button{"@click" => "save(), enJin.audioController.play('pop6')"}
+                        %img.icon{:src => 'https://assets.codepen.io/217233/p3d_save_1.svg', :draggable => 'false', ":class" => "{saving : saving}"}
+                        %img.loader{:src => 'https://assets.codepen.io/217233/Dual+Ring-1s-200px.gif', :draggable => 'false', ":class" => "{saving : saving}"}
+                            .tooltip
+                                Save
+                    .load.button{"@click" => "openModal('load'), enJin.audioController.play('pop6')"}
+                        %img{:src => 'https://assets.codepen.io/217233/p3d_new.svg', :draggable => 'false'}
+                            .tooltip
+                                Load
+                    .community.button{"@click" => "openModal('community'), enJin.audioController.play('pop6')"}
+                        Community
+                .options
+                    .button{"@click" => "toggleAudio()", ":class" => "{active : muted}"}
+                        %img.icon{:src => 'https://assets.codepen.io/217233/p3d_mute.svg', :draggable => 'false'}
+                            .tooltip
+                                Audio
+                    .button{"@click" => "toggleMotion()", ":class" => "{active : !motion}"}
+                        %img{:src => 'https://assets.codepen.io/217233/p3d_nomotion.svg', :draggable => 'false'}
+                            .tooltip
+                                Motion
+        .p3d_main__editor
+            .editor_left
+                .editor_left__header{":class" => "{export : mode == 'export'}"}
+                    .e_buttons{":class" => "{hide : mode != 'drawing'}"}
+                        .button{":class" => "{active : symMode == ''}", "@click" => "symMode = ''"}
+                            %img{:src => 'https://assets.codepen.io/217233/p3d_sym_none_1.svg', :draggable => 'false'}
+                            .tooltip
+                                No Symmetry
+                        .button{":class" => "{active : symMode == 'x'}", "@click" => "symMode = 'x'"}
+                            %img{:src => 'https://assets.codepen.io/217233/p3d_sym_x_1.svg', :draggable => 'false'}
+                            .tooltip
+                                X Symmetry
+                        .button{":class" => "{active : symMode == 'y'}", "@click" => "symMode = 'y'"}
+                            %img{:src => 'https://assets.codepen.io/217233/p3d_sym_y_1.svg', :draggable => 'false'}
+                            .tooltip
+                                Y Symmetry
+                        .button{":class" => "{active : symMode == 'xy'}", "@click" => "symMode = 'xy'"}
+                            %img{:src => 'https://assets.codepen.io/217233/p3d_sym_xy_1.svg', :draggable => 'false'}
+                            .tooltip
+                                XY Symmetry
+                    .e_tabs
+                        .e_tabs__tab.button{"@click" => "swapMode('drawing'), drawMode = 'draw', exportSettings.scale = 0.8, updateOrientation(0, 90, 0, false)", ":class" => "{active : mode == 'drawing'}"}
+                            Draw
+                            .tooltip
+                                Draw pixel art
+                        .e_tabs__tab.button{"@click" => "swapMode('extrude'), drawMode = 'extrude', exportSettings.scale = 0.8, updateOrientation(-30, 140, 0, false)", ":class" => "{active : mode == 'extrude'}"}
+                            Extrude
+                            .tooltip
+                                Give depth
+                        .e_tabs__tab.button{"@click" => "swapMode('paint'), drawMode = 'draw', exportSettings.scale = 0.8, updateOrientation(0, 90, 0, false), orientationButton = 'front'", ":class" => "{active : mode == 'paint'}"}
+                            Paint
+                            .tooltip
+                                Paint voxels
+                        .e_tabs__tab.button{"@click" => "swapMode('export'), updateOrientation(0, 90, 0, true)", ":class" => "{active : mode == 'export'}"}
+                            Export
+                            .tooltip
+                                Export for web
+                    .e_sym
+                .editor_left__main{"@mouseleave" => "picker.active = false"}
+                    .m_palette{":class" => "{hide : mode == 'extrude'}"}
+                        .buttons
+                            .button.draw{"@click" => "drawMode = 'draw', enJin.audioController.play('pop6')", ":class" => "{active : drawMode == 'draw'}"}
+                                %img{:src => 'https://assets.codepen.io/217233/p3d_pencil.svg', :draggable => 'false'}
+                                .tooltip
+                                    Draw
+                            .button.erase{"v-if" => "mode != 'paint'", "@click" => "picker.active = false, drawMode = 'erase', enJin.audioController.play('pop6')", ":class" => "{active : drawMode == 'erase'}"}
+                                %img{:src => 'https://assets.codepen.io/217233/p3d_eraser_2.svg', :draggable => 'false'}
+                                .tooltip
+                                    Erase
+                        
+                        .cPicker{"@click" => "picker.active = !picker.active", ":class" => "{active : picker.active}"}
+                            %svg{:fill => "none", :height => "18", :viewbox => "0 0 18 18", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
+                                %path{:d => "M16.3 0.75C15.3 -0.25 13.7 -0.25 12.7 0.75L10.9 2.55L10.2 1.85C9.8 1.45 9.2 1.45 8.8 1.85L8 2.55C7.6 2.95 7.6 3.55 8 3.95L13 8.95C13.4 9.35 14 9.35 14.4 8.95L15.1 8.25C15.5 7.85 15.5 7.25 15.1 6.85L14.5 6.15L16.3 4.35C17.3 3.35 17.3 1.75 16.3 0.75V0.75ZM2.9 10.55C0.7 12.75 2 13.75 0 16.35L0.7 17.05C3.3 15.05 4.3 16.35 6.5 14.15L11.6 9.05L8 5.45L2.9 10.55Z", :fill => "black"}
+                        #colorPicker             
+                    .m_palette.palette--depth{":class" => "{hide : mode != 'extrude'}"}
+                        .buttons
+                            .button.erase{"@click" => "drawMode = 'extrude', enJin.audioController.play('pop6')", ":class" => "{active : drawMode == 'extrude'}"}
+                                %img{:src => 'https://assets.codepen.io/217233/p3d_extrude.svg?x=ghfh', :draggable => 'false'}
+                                .tooltip
+                                    Extrude 
+                            .button.erase{"@click" => "drawMode = 'hollow', enJin.audioController.play('pop6')", ":class" => "{active : drawMode == 'hollow'}"}
+                                %img{:src => 'https://assets.codepen.io/217233/p3d_hollow.svg?x=ghfh', :draggable => 'false', :draggable => 'false'}
+                                .tooltip
+                                    Shell 
+                        .dp-outer
+                            .hollowTip{":class" => "{hide : drawMode == 'extrude'}"}
+                                .help
+                                    Shell a group
+                                    %img.icon{:src => 'https://assets.codepen.io/217233/p3d_help.svg', :draggable => 'false'}
+                                    .gif
+                                        .desc
+                                            %h4 Shell tool
+                                            Use the shell toggle to remove the voxels between the first and last in the row. Handy for optimising your model and removing voxels that cannot be seen. Also great for creating legs.
+                                        %img{:src => 'https://assets.codepen.io/217233/shell.gif', :draggable => 'false'}
+                                .button{"@click" => "shell = true, enJin.audioController.play('pop6')", ":class" => "{active : shell}"}
+                                    On
+                                .button{"@click" => "shell = false, enJin.audioController.play('pop6')", ":class" => "{active : !shell}"}
+                                    Off
+                            .dpgrid{":class" => "{hide : drawMode == 'hollow'}"}
+                                .help
+                                    Select a depth
+                                    %img.icon{:src => 'https://assets.codepen.io/217233/p3d_help.svg', :draggable => 'false'}
+                                    .gif
+                                        .desc
+                                            %h4 Extrude tool
+                                            Select a level of depth, then click on any pixel to extrude by that amount. New voxels will be created along the z axis which can be individually painted.
+                                        %img{:src => 'https://assets.codepen.io/217233/depth.gif', :draggable => 'false'}
+                                -(1..9).each do | index |
+                                    .dp{':data-depth' => index, "@click" => "setDepth($event), enJin.audioController.play('pop6')", ":class" => "{active : currentDepth == #{index}}"} #{index}
+                    .m_grid{"@mousedown" => "drawing = true", "@mouseup" => "drawing = false", "@mouseup.right" => "handleRightClick()", "@mouseleave" => "drawing = false", ":class" => "{hide : mode == 'paint', loading : loading}"}
+                        .helper-x{":class" => "{active : symMode == 'x' || symMode == 'xy'}"}
+                        .helper-y{":class" => "{active : symMode == 'y' || symMode == 'xy'}"}
+                        %img.loader{:src => 'https://assets.codepen.io/217233/Dual+Ring-1s-200px.gif', :draggable => 'false', ":class" => "{saving : saving}"}
+                        .m_grid__pixel{":data-index" => "index", ":data-y" => "Math.floor(`${index / canvasSize + 1}`)", ":data-x" => "Math.ceil(`${index % canvasSize}`)", "@click" => "selectColor()", "@mouseenter" => "drawPixel($event)", "@mousedown" => "drawPixel($event)", "@contextmenu.prevent" => '', ":key" => "voxel.x", "v-for" => "(voxel, index) in voxels", ":style" => ""}
+                            .p{"v-if" => "voxel.c", ":style" => "`background: #${voxel.c[0][1]}`"}
+                            .d{":class" => "{show : mode == 'extrude' && drawMode == 'extrude'}"}{{voxel.d}}
+                            .d{":class" => "{show : mode == 'extrude' && drawMode == 'hollow' && voxel.h}"} S
+                            
+            .editor_right
+                .editor_right__export{":class" => "{show : mode == 'export'}"}
+                    %h3 Export settings
+                    %p.sub Export your VoCSSel for web, or as a png based on the current view
+                    .form
+                    .row
+                        .row-half
+                            %label{:for => 'name'} VoCSSel name
+                            %input#name{":value" => "exportSettings.name", "v-model" => "exportSettings.name", :type => 'text'}
+                        .row-half
+                            %label{:for => 'name'} Author name
+                            %input#name{":value" => "author", "v-model" => "author", :type => 'text'}
+                        .save.button{"@click" => "save(), enJin.audioController.play('pop6')"}
+                            %img.icon{:src => 'https://assets.codepen.io/217233/p3d_save_1.svg', :draggable => 'false', ":class" => "{saving : saving}"}
+                            %img.loader{:src => 'https://assets.codepen.io/217233/Dual+Ring-1s-200px.gif', :draggable => 'false', ":class" => "{saving : saving}"}
+                                .tooltip
+                                    Save
+                    %br
+                    .row
+                        %label{:for => 'exportBg'} Background color
+                        %input#exportBg
+                        %img{:src => 'https://assets.codepen.io/217233/p3d_resetColour.svg', :draggable => 'false', "@click" => "resetBgColor()"}
+                    .row
+                        %label{:for => 'perspective'} 
+                            Perspective: 
+                            %span {{exportSettings.perspective}}px
+                        %input#perspective{":value" => "exportSettings.perspective", :min => 100, :max => 3000, :type => 'range', "v-model" => "exportSettings.perspective"}
+                    .row
+                        %label{:for => 'animate'} 
+                            Animate 
+                            %span 
+                                %span Turn off for viewport control
+                        %input#animate{":value" => "exportSettings.animate", :type => 'checkbox', "v-model" => "exportSettings.animate"}
+                    .row{"v-if" => "exportSettings.animate"}
+                        %label{:for => 'speed'} 
+                            Speed: 
+                            %span {{exportSettings.spinSpeed}}s
+                        %input#speed{":value" => "exportSettings.spinSpeed", :type => 'range', :min => 0.1, :max => 20, :step => 0.1, "v-model" => "exportSettings.spinSpeed"}
+                    .row{"v-if" => "!exportSettings.animate"}
+                        .row-half
+                            %label{:for => 'rotateX'} 
+                                Rotate X: 
+                                %span {{exportSettings.x}}deg
+                            %input#rotateX{":value" => "exportSettings.x", :type => 'range', :min => -180, :max => 180, :step => 10, "v-model" => "exportSettings.x"}
+                        .row-half
+                            %label{:for => 'rotateY'} 
+                                Rotate Y: 
+                                %span {{exportSettings.y}}deg
+                            %input#rotateY{":value" => "exportSettings.y", :type => 'range', :min => -180, :max => 180, :step => 10, "v-model" => "exportSettings.y"}
+
+                    .row{"v-if" => "!exportSettings.animate"}
+                        .row-half
+                            %label{:for => 'rotateZ'} 
+                                Rotate Z: 
+                                %span {{exportSettings.z}}deg
+                            %input#rotateZ{":value" => "exportSettings.z", :type => 'range', :min => -180, :max => 180, :step => 10, "v-model" => "exportSettings.z"}
+                        .row-half
+                            %label{:for => 'scale'} 
+                                Scale: 
+                                %span {{exportSettings.scale}}
+                            %input#scale{":value" => "exportSettings.scale", :type => 'range', :min => 0.01, :max => 3, :step => 0.01, "v-model" => "exportSettings.scale"}
+                    .buttons
+                        %button{"@click" => "openModal('share'), enJin.audioController.play('pop6')"} Share with community
+                        %button.cp{"@click" => "processForExport()", ":class" => "{exporting : exporting}"}
+                            %img.loader{:src => 'https://assets.codepen.io/217233/Dual+Ring-1s-200px.gif', :draggable => 'false', ":class" => "{saving : saving}"}
+                            Export to CodePen
+                %p{":class" => "{hide : mode == 'export' || mode == 'paint'}"} HTML / CSS Output
+                %img{:src => 'https://assets.codepen.io/217233/p3d_resetColour.svg', :draggable => 'false', "@click" => "resetBgColor()", ":class" => "{hide : mode == 'export'}"}
+                %input#colorBg{":class" => "{hide : mode == 'export'}"}
+                .editor_right__preview{":class" => "{export : mode == 'export', paint : mode == 'paint'}"}
+                    .p_inner#model{":style" => "`background: ${exportSettings.bgColor};`"}
+                        .button.zooms.first{"@click" => "handleZoom(0.05), enJin.audioController.play('pop6')", ":class" => "{hide : mode == 'export'}"}
+                            %img{:src => 'https://assets.codepen.io/217233/p3d_zoomIn.svg', :draggable => 'false'}
+                        .button.zooms{"@click" => "handleZoom(-0.05), enJin.audioController.play('pop6')", ":class" => "{hide : mode == 'export'}"}
+                            %img{:src => 'https://assets.codepen.io/217233/p3d_zoomOut.svg', :draggable => 'false'}
+                        .button.zooms{"@click" => "zoomLevel = .8, enJin.audioController.play('pop6')", ":class" => "{hide : mode == 'export'}"}
+                            %img{:src => 'https://assets.codepen.io/217233/p3d_resetZoom.svg', :draggable => 'false'}
+                        .views{":class" => "{show : mode == 'paint'}"}
+                            .button{"@click" => "updateOrientation(0, 90, 0, false), orientationButton = 'front'", ":class" => "{active : orientationButton == 'front'}"} Front
+                            .button{"@click" => "updateOrientation(0, -90, 0, false), orientationButton = 'back'", ":class" => "{active : orientationButton == 'back'}"} Back
+                            .button{"@click" => "updateOrientation(0, 180, 0, false), orientationButton = 'left'", ":class" => "{active : orientationButton == 'left'}"} Left
+                            .button{"@click" => "updateOrientation(0, 0, 0, false), orientationButton = 'right'", ":class" => "{active : orientationButton == 'right'}"} Right
+                            .button{"@click" => "updateOrientation(-90, 0, 0, false), orientationButton = 'top'", ":class" => "{active : orientationButton == 'top'}"} Top
+                            .button{"@click" => "updateOrientation(90, 0, 0, false), orientationButton = 'bottom'", ":class" => "{active : orientationButton == 'bottom'}"} Bottom
+                            .button{"@click" => "updateOrientation(-30, 50, 0, false), orientationButton = 'iso1'", ":class" => "{active : orientationButton == 'iso1'}"} Isometric 1
+                            .button{"@click" => "updateOrientation(-30, 140, 0, false), orientationButton = 'iso2'", ":class" => "{active : orientationButton == 'iso2'}"} Isometric 2
+                            .button{"@click" => "updateOrientation(-30, 230, 0, false), orientationButton = 'iso3'", ":class" => "{active : orientationButton == 'iso3'}"} Isometric 3
+                            .button{"@click" => "updateOrientation(-30, 310, 0, false), orientationButton = 'iso4'", ":class" => "{active : orientationButton == 'iso4'}"} Isometric 4
+                        .zoom{"@wheel" => "zoom($event)", ":style" => "`transform: scale(${zoomLevel})`"}
+                            .exportWrap
+                                .model{"v-if" => "voxels", ":class" => "{extrude : mode == 'extrude', spin : mode == 'export' && exportSettings.animate, export : mode == 'export', paint : mode == 'paint'}", ":style" => "`transform: scale(${exportSettings.scale}) rotateZ(${exportSettings.z}deg) rotateX(${exportSettings.x}deg) rotateY(${exportSettings.y}deg); animation-duration: ${exportSettings.spinSpeed}s`"}
+                                    .voxel-group{"v-if" => "voxelGroup.length != 0", ":key" => "voxelGroup.x", "v-for" => "(voxelGroup, index) in voxels", "stagger" => "50", ":class" => "`g-${voxelGroup.d}`", ":data-index" => "`${voxelGroup.index}`"}
+                                        .voxel{"v-if" => "voxelGroup.c", ":key" => "index", "v-for" => "(voxel, index) in voxelGroup.d", ":class" => "`d-${index}`"}
+                                            .v{"v-if" => "voxelGroup.c[index] != ''", ":class" => "`x-${voxelGroup.x} y-${voxelGroup.y}`", ":data-index" => "`${index}`"}
+                                                .f.f--f{"v-if" => "voxelGroup?.c?.[index]?.[0]", ":data-vertex"  => "0" ,":style" => "[voxelGroup.c ? { background: `#${voxelGroup.c[index][0]}` } : null]", ":class" => "{paintable : mode == 'paint'}", "@click" => "paint($event)"}
+                                                .f.f--ba{"v-if" => "voxelGroup?.c?.[index]?.[0]", ":data-vertex" => "1" ,":style" => "[voxelGroup.c ? { background: `#${voxelGroup.c[index][1]}` } : null]", ":class" => "{paintable : mode == 'paint'}", "@click" => "paint($event)"}
+                                                .f.f--t{"v-if" => "voxelGroup?.c?.[index]?.[0]", ":data-vertex"  => "2" ,":style" => "[voxelGroup.c ? { background: `#${voxelGroup.c[index][2]}` } : null]", ":class" => "{paintable : mode == 'paint'}", "@click" => "paint($event)"}
+                                                .f.f--b{"v-if" => "voxelGroup?.c?.[index]?.[0]", ":data-vertex"  => "3" ,":style" => "[voxelGroup.c ? { background: `#${voxelGroup.c[index][3]}` } : null]", ":class" => "{paintable : mode == 'paint'}", "@click" => "paint($event)"}
+                                                .f.f--l{"v-if" => "voxelGroup?.c?.[index]?.[0]", ":data-vertex"  => "4" ,":style" => "[voxelGroup.c ? { background: `#${voxelGroup.c[index][4]}` } : null]", ":class" => "{paintable : mode == 'paint'}", "@click" => "paint($event)"}
+                                                .f.f--r{"v-if" => "voxelGroup?.c?.[index]?.[0]", ":data-vertex"  => "5" ,":style" => "[voxelGroup.c ? { background: `#${voxelGroup.c[index][5]}` } : null]", ":class" => "{paintable : mode == 'paint'}", "@click" => "paint($event)"}
+                %p.voxelCount{":class" => "{hide : mode == 'export' || mode == 'paint'}"} 
+                    %span 
+                        {{getVoxelsCount()}} 
+                    Voxels | 
+                    %span
+                        {{getVerticesCount() - 1}} 
+                    Vertices
+                    %span.block{":class" => "{show : getVerticesCount() > 750}"}
+                        %img.icon{:src => 'https://assets.codepen.io/217233/p3d_warning.svg', :draggable => 'false'}
+                        Performance will decrease as the vertices count increases. Make sure to shell out any unused voxels for maximum performance.
+        .p3d_main_footer
+            %p 
+                Made with love by 
+                %a{:href => 'https://www.codepen.io/jcoulterdesign', :target => "_blank"} Jamie Coulter

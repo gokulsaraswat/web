@@ -1,0 +1,10 @@
+h1 Pure css loader #4
+h2 Inspired by Mike Mirandi (via 
+  a(href="https://dribbble.com/shots/2120614-Load-Screen-Bars", target="blank") dribble
+  |)
+
+div.loader
+  -for (var x = 1; x < 26; x++)
+    div(class="item item-" + x)
+      div.lighter
+      div.darker

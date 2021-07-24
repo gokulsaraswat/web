@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Vue Interactive Demo Tutorial</title>
+  <link href="https://fonts.googleapis.com/css?family=Fira+Mono:400,500|Source+Sans+Pro:700|Source+Serif+Pro:400,600" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="app-container">
+		
+	<div id="app">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+        <h1>{{ name }}</h1>
+		<p>Welcome! Let's learn a bit about Vue.js with this interactive demo, shall we? 🤓</p>
+		<p>Here's a quick preview: try editing the title in the text input field.</p> 
+		
+<pre class="js">data: {
+    <b>name:</b> '{{ name }}'
+}</pre>
+
+			<input type="text" v-model:value="name" @click="selectThis">
+		
+		<p><strong>✨ That magic is all Vue!</strong> Let's learn how to set it up.</p>
+		
+		<h2>📩 Including Vue</h2>
+		
+		<p><strong>One of the great things about Vue is how easy it is to get started!</strong> There are only two steps, really:</p>
+		
+		<ol>
+
+			<li><strong>Add a script tag to load the vue.js file:</strong> 
+				<pre>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.min.js"&gt;&lt;/script&gt;</pre>
+				(If you're using Vue here on CodePen, you can just add it as an External Script in the JS cog menu.)
+			</li>
+
+			<li><strong>Add a bit of JavaScript to create a new Vue instance and set up its options.</strong> The most important option is <code>el</code>; this will load our Vue instance into an element on the page (using a CSS/jQuery style selector), and swap out that element's contents with our Vue instance's template: 
+<pre class="js"><div class="highlight">const app = new Vue({
+    <b>el:</b> '#app'
+    <span class="comment">//We'll add more options here shortly</span>
+});</div></pre>
+			</li>
+
+		</ol>
+
+		<p>The above code replaces the element that has the ID of <code>app</code> with our new Vue instance. <strong>This makes it easy to inject as much or as little Vue functionality as you want into any page or app!</strong></p>
+		
+		<p class="note">You can also work with Vue by creating single-file <code>.vue</code> components. This is a very nice way to build, but it requires a compiler, so loading Vue as a script is an easier way to get started.<p>
+		
+	  	<p>However, our Vue instance doesn't do anything just yet. For that, we'll need an HTML template for Vue to render, and we'll probably want some dynamic data to use in that HTML…</p>
+		
+
+
+		<h2>📈 Vue data</h2>
+
+		<p>Vue stores its data inside the <code>data</code> property of the Vue instance. The <code>data</code> object can hold any type of values (strings, numbers, booleans, arrays, etc.):</p>
+
+<pre class="js">const app = new Vue({
+    <b>el:</b> '#app', 
+    <div class="highlight"><b>data</b>: {
+        <b>name:</b> '{{ name }}',
+        <b>demoData:</b> '{{ demoData }}',
+        <b>clickCount:</b> {{ clickCount }},
+        <b>favoriteSites:</b> ['CodePen', 'GitHub', 'Codecademy', 'VueJS']
+}</div>
+});</pre>
+
+        <p>This lets you build pages dynamically, so that if the value changes, your HTML will update to reflect the change. You can reference any property inside of <code>data</code> easily with "handlebar" syntax, just by using the property name:</p>
+        
+        <pre>&lt;p&gt;Here's some Vue data: {&hairsp;{ <b>demoData</b> }&hairsp;} &lt;/p&gt;</pre>
+        
+        <p class="demo">Here's some Vue data: {{ demoData }}</p>
+        
+        <p class="note">If you're working here on CodePen, you can enter your template code directly into the HTML pane. Nifty! That's what I've done here, but otherwise, you'll need to put your HTML template code into a <code>template</code> property in the Vue object.</p>
+        
+
+        <h3>Binding Data to Attributes</h3>
+        
+        <p><strong>Here's the cool part:</strong> Vue lets you easily create two-way data binding between form elements and Vue data, so that when either is updated, they automatically stay in sync!</p>
+        <p>This is done with the <code>v-model</code> directive (which is attached to an HTML attribute&mdash;in this case, <code>value</code> ).</p>
+
+<pre>
+<div class="highlight">&lt;input <b>v-model:value="demoData"</b> /&gt;</div>
+&lt;p&gt;The input says: {&hairsp;{ demoData }&hairsp;}&lt;/p&gt;
+</pre>
+
+<pre class="js">const app = new Vue({
+    <b>el:</b> '#app', 
+    <b>data:</b> {
+        <b>name:</b> '{{ name }}',
+        <div class="highlight"><b>demoData:</b> '{{ demoData }}',</div>
+        <b>clickCount:</b> {{ clickCount }},
+        <b>favoriteSites:</b> ['CodePen', 'GitHub', 'Codecademy', 'VueJS']
+    }
+ });</pre>
+		
+		  <p>Here's how that looks. <strong>Edit the input below and watch the above examples change, too!</strong></p>
+   
+        <p class="demo">
+            <input v-model:value="demoData" @click="selectThis"/>
+            <br /><br />
+            <span>The input says: {{ demoData }}</span>
+        </p>
+		
+			<p class="note">Vue will assume <code>value</code> if you don't provide an attribute. So if you like, you can shorten <code>v-model:value</code> to simply <code>v-model</code>.</p>
+    
+    
+		
+		<h2>🖱️ Vue events</h2>
+		
+		<p>Vue allows you to easily watch for and react to events like clicks, user input, form changes and more (without the need to mess with typical JavaScript event listeners). <strong>This is done with the <code>v-on</code> attribute</strong>, which is attached to the event you'd like to watch for (in this case, "click").</p>
+
+<pre><div class="highlight">&lt;button <b>v-on:click="updateClickCount"</b>&gt;</div>
+ The button has been clicked {&hairsp;{ <b>clickCount</b> }&hairsp;} times.
+&lt;/button&gt;</pre>
+
+		<p class="demo">
+			<button v-on:click="updateClickCount">The button has been clicked {{ clickCount }} times.</button>
+		</p>
+
+		<p>There are many types of events your Vue instance can "listen" for: <code>click</code>, <code>change</code>, <code>input</code>, <code>keydown</code> and many more. But they're not super useful without…</p>
+		
+			
+			
+		<h2>⚙️ Vue methods</h2>
+		
+        <p><strong>As you might have realized, <code>v-on</code> lets us track events, but we'll still need to create a function to run whenever those events happen</strong>.</p>
+        <p><strong>Vue lets you define any number of methods in (what else?) the <code>methods</code> property.</strong> Any methods there can simply be called by name.</p>
+        
+        <p>So at this point, our code might look like this (with the new <code>methods</code> property highlighted, and added to our button with <code>v-on:click</code> ):</p>	
+        
+<pre><div class="highlight">&lt;button <b>v-on:click="updateClickCount"</b>&gt;</div>
+    This button has been clicked {&hairsp;{<b> clickCount </b>}&hairsp;} times.
+&lt;/button&gt;</pre>	
+
+<pre class="js">const app = new Vue({
+    <b>el:</b> '#app',
+    <b>data:</b> {
+        <b>name:</b> '{{ name }}',
+        <b>demoData:</b> '{{ demoData }}',
+        <div class="highlight"><b>clickCount:</b> {{ clickCount }},</div>
+        <b>favoriteSites:</b> ['CodePen', 'GitHub', 'Codecademy', 'VueJS']
+    },
+    <div class="highlight"><b>methods:</b> {
+    <b>updateClickCount()</b> {
+        this.clickCount += 1;
+    }
+}</div>
+});</pre>
+			
+        <p class="demo">
+            <button v-on:click="updateClickCount"> This button has been clicked {{ clickCount }} times.</button>
+        </p>
+        
+        <p class="note">You might notice that the keyword <code>this</code> refers to the Vue instance. In our templates, calling a data property with handlebar syntax (<code>{{ property }}</code>) works perfectly. But when running JS from <strong>within</strong> the Vue instance, we'll need to specify the scope, with <code>this.property</code>.</p>
+        
+        
+
+        <h2>🔁 Vue Loops</h2>
+
+        <p>Oftentimes, we'll have arrays of data in our Vue instance that we need to loop over to display in our HTML. Vue makes this a breeze with the <code>v-for</code> directive!</p>
+
+<pre>&lt;ul&gt;
+    <div class="highlight">&lt;li <b>v-for="site in favoriteSites"</b>&gt;<b>{&hairsp;{ site }&hairsp;}</b>&lt;/li&gt;</div>
+&lt;/ul&gt;
+</pre>
+
+        <ul class="demo">
+            <li v-for="site in favoriteSites">{{ site }}</li>
+        </ul>
+	
+	    <p><strong>Voilà!</strong> Multiple <code>&lt;li&gt;</code> tags with a simple line of Vue code!</p>
+		
+		
+	    <h3>Iterable Properties</h3>
+	
+		<p>As you might have guessed, if you have an array of objects, <code>v-for</code> allows you to use each object property separately by using it with dot notation:</p>
+	
+<pre class="js"><div class="highlight"><b>favoriteSitesDetails:</b> [
+    {<b>name:</b> 'CodePen', <b>url:</b> 'https://codepen.io'},
+    {<b>name:</b> 'GitHub', <b>url:</b> 'https://github.com'}, 
+    {<b>name:</b> 'Codecademy', <b>url:</b> 'https://www.codecademy.com'}, 
+    {<b>name:</b> 'VueJS', <b>url:</b> 'https://vuejs.org'}
+]</div>
+</pre>
+	
+<pre>&lt;ul&gt;
+    <div class="highlight">&lt;li <b>v-for="site in favoriteSitesDetails"</b>&gt;
+    &lt;a href="<b>site.url</b>"&gt;<b>{&hairsp;{ site.name }&hairsp;}</b>&lt;/a&gt;
+&lt;/li&gt;</div>
+&lt;/ul&gt;
+</pre>
+	
+        <ul class="demo">
+            <span class="comment">//Whoops! These links don't work yet… 🤔</span>
+            <li v-for="site in favoriteSitesDetails">
+                <a href="site.url" target="_blank">{{ site.name }}</a>
+            </li>
+        </ul>
+	
+	    <p>We've got a little bit of an issue here, though. Let's find out why!</p>
+		
+		
+		
+        <h2>💥 Dynamic Attributes</h2>
+        
+        <p>If you tried clicking any of those links above, you noticed a problem: <strong>all of the links go to <code>site.url</code>.</strong></p>
+        
+        <p>That's not a real URL, and it's not what we meant when we wrote the <code>href</code> value. We want the attribute's value to be dynamic, not what we literally typed. But we can't use handlebar syntax for HTML attributes, so what can we do?</p>
+        
+        <p><strong>Easy!</strong> Just use the <code>v-bind</code> attribute to indicate that <strong>the attribute's value is dynamic Vue data</strong>, and not the literal typed value. </p>
+        
+<pre>&lt;ul&gt;
+    &lt;li <b>v-for="site in favoriteSitesDetails"</b>&gt;
+    <div class="highlight">&lt;a <b>v-bind:href="site.url</b>"&gt;<b>{&hairsp;{ site.name }&hairsp;}</b>&lt;/a&gt;</div>
+&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+			<ul class="demo">
+				<li v-for="site in favoriteSitesDetails">
+					 <a v-bind:href="site.url" target="_blank">{{ site.name }}</a> <span class="comment">&emsp;//goes to {{ site.url }}</span>
+				</li>
+			</ul>
+		
+			<h3>Going a little deeper with loops</h3>
+		
+			<p>While it's not shown here, <code>v-for</code> loop items should <em>also</em> include a unique <code>:key</code> attribute, to keep loop items separate.</p>
+		
+			<p>Luckily, <code>v-for</code> loops can <em>also</em> access the index of the loop item, by supplying a second argument to the loop. Both of these are shown in the code below:</p>
+		
+<pre>&lt;ul&gt;
+    &lt;li v-for="<b>(site, index)</b> in favoriteSitesDetails"&gt;
+    <div class="highlight">&lt;a v-bind:href="site.url" <b>:key="index"</b> &gt;<b>{&hairsp;{ site.name }&hairsp;}</b>&lt;/a&gt;</div>
+&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+			<p class="note">Note that <code>v-bind</code> is very much like <code>v-model</code>, but unlike <code>v-model</code>, <code>v-bind</code> is <strong>one-way</strong> data binding (not two-way). This means that changing the JS will update the HTML, but not the other way around. This makes <code>v-bind</code> a good choice for non-interactive elements. <br/><br/>(You could add an event and a method to make <code>v-bind</code> two-way, but at that point, it's probably better to just use <code>v-model</code> instead wherever possible.)</p>
+		
+	
+	
+			<h2>📝 Shorthand syntax</h2>
+
+			<p>As you can imagine, you could often end up using lots of <code>v-on</code> and <code>v-bind</code> directives in your Vue templates. To make the code a little cleaner in these cases, Vue offers shorthand for both.</p>
+
+			<p>
+				<ul>
+					 <li><strong>The shorthand for <code>v-bind</code> is <code>:</code></strong> <br>(e.g., <code>:href="url"</code>).</li>
+					 <li><strong>The shorthand for <code>v-on</code> is <code>@</code></strong> <br>(e.g., <code>@click="updateClickCount"</code> ).</li>
+				</ul>
+			</p>
+
+			<p>Here's an example using both shorthands, and using <code>v-bind</code> (or, <code>:</code>) to conditionally add attributes to elements based on a <code>data</code> boolean.</p>
+	
+<pre>
+<div class="highlight">&lt;p :hidden="!isAlert" class="alert"&gt;🚨ALERT!&lt;/p&gt;</div>
+
+<div class="highlight">&lt;button @click="toggleAlert"&gt;Toggle alert&lt;/button&gt;</div>
+</pre>
+	
+<pre class="js">
+<b>data:</b> {
+    <div class="highlight"><b>isAlert:</b> {{ isAlert }},</div>
+},
+<b>methods:</b> {
+    <div class="highlight"><b>toggleAlert()</b> {
+        this.isAlert = !this.isAlert;
+    }</div>
+}
+</pre>
+	
+        <p class="demo">
+            <span :hidden="!isAlert" class="alert">🚨ALERT!</span>
+            <br />
+            <button @click="toggleAlert">Toggle alert</button>
+        </p>
+			
+	
+	
+	    <h2>⁉️ Conditional Attributes</h2>
+	
+	    <p><strong>The real power of binding attributes comes with conditional statements.</strong> Let's check out how you can dynamically add classes to elements with a ternary expression!</p>
+		
+<pre>
+<div class="highlight">&lt;p<b>:class="isAlert ? 'alert' : 'default'"</b>&gt;My class is: {&hairsp;{ isAlert ? 'alert' : 'default' }&hairsp;}&lt;/p&gt;</div>
+
+<div class="highlight">&lt;button<b>@click="toggleAlert"</b>&gt;Click to toggle class&lt;/button&gt;</div>
+</pre>
+
+<pre class="js">
+data: {
+    isAlert: {{ isAlert }}
+},
+methods: {
+    toggleAlert() {
+        this.isAlert = !this.isAlert;
+    }
+}
+</pre>
+		
+        <p class="demo">
+            <span :class="isAlert ? 'alert' : 'default'">My class is: {{ isAlert ? 'alert' : 'default' }}</span>
+            <br />
+            <button @click="toggleAlert">Click to toggle class</button>
+        </p>
+        
+        <p>Having logic in our HTML templates makes things pretty messy though. There must be a better way, right?</p>
+        
+        <p><strong>There sure is!</strong> Let's look at…</p>
+        
+		
+	
+	
+        <h2>🤖 Computed Properties</h2>
+        
+        <p>As we just saw, having a ternary operator in the middle of our HTML&mdash;while it worked well&mdash;made things a little tough to read. Good news: that's what computed properties are for!</p>
+        
+        <p><strong>A computed property is just a function that returns a "computed" value</strong>; something that needs to be obtained through an expression. (For example, adding two numbers together, concatenating strings, or in our case: examining a boolean and returning a certain string based on its value.)</p>
+            
+        <p>So if we want to add the "alert" class to an element when <code>isAlert</code> is true, and a "default" class when <code>isAlert</code> is false (as above), we can tuck that logic away in a computed function (named <code>getClass</code>, in this case) to keep our template file tidy.</p>
+
+<pre>
+<div class="highlight">&lt;p<b>:class="getClass"</b>&gt;My class is: {&hairsp;{ getClass }&hairsp;}&lt;/p&gt;</div>
+
+&lt;button<b>@click="toggleAlert"</b>&gt;Click to toggle class&lt;/button&gt;
+</pre>
+
+<pre class="js">
+<b>data:</b> {
+    <b>isAlert:</b> {{ isAlert }}
+},
+<b>methods:</b> {
+    <b>toggleAlert()</b> {
+        this.isAlert = !this.isAlert;
+    }
+},
+<div class="highlight"><b>computed:</b> {
+    <b>getClass()</b> {
+        return this.isAlert ? 'alert' : 'default';
+    }
+}</div>
+
+</pre>
+
+        <p class="demo">
+            <span :class="getClass">My class is: {{ getClass }}</span>
+                <br />
+                <button @click="toggleAlert">Click to toggle class</button>
+        </p>
+
+	    <p>Note that <strong>nothing has changed here functionally</strong>. This still works exactly as it did before. But now, we have a simple, reusable way to figure out if the "alert" or "default" class should be used, which renders our template file (pun intended) much more readable.</p>
+
+        <p class="note">
+            <strong>So what's the difference between a computed property and a plain ol' method?</strong> Well, in a nutshell:
+            <br /> 
+            <br />
+            • <strong>Methods</strong> are the ordinary JavaScript functions you're used to; they can be called at will, can be supplied arguments, and can do anything (including update <code>data</code> values).
+            <br />
+            • <strong>Computed properties</strong> don't take arguments, and they aren't called, exactly. They just <strong>return</strong> a value, and you insert them wherever you want to use that returned value. In other words (appropriately), they just compute; they don't change things. (Vue also caches them, so they're more performant.)
+
+        </p>
+
+
+
+        <h2>🎱 Conditional Rendering</h2>
+
+        <p><strong>We're getting close to the end!</strong> One last thing I want to cover: rendering elements conditionally.</p>
+
+        <p><strong>The <code>v-if</code> directive allows us to use logic in our templates.</strong> For example, let's say we want to show the user one element if <code>loading</code> is true, then swap it out for another once <code>loading</code> is false:</p>
+
+<pre>
+&lt;p <b>v-if="loading"</b>&gt;⏳ Loading...&lt;/p&gt;
+&lt;p <b>v-else</b>&gt;✅ Loaded!&lt;/p&gt;
+
+&lt;button <b>@click="toggleLoading"</b>&gt;Toggle Loading&lt;/button&gt;
+</pre>
+
+<pre class="js">
+<b>data:</b> {
+    <b>loading:</b> {{ loading }}
+},
+<b>methods:</b> {
+    <b>toggleLoading()</b> {
+        this.loading = !this.loading;
+    }
+}
+</pre>
+
+        <p class="demo">
+            <span v-if="loading">⏳ Loading...</span>
+            <span v-else>✅ Loaded!</span>
+            <br />
+            <button @click="toggleLoading">Toggle Loading</button>
+        </p>
+	
+        <p>As you might expect, Vue also offers a <code>v-else-if</code> directive, so that you can string together complex conditions based on data!</p>
+
+<pre>
+&lt;strong&gt;My rating: &lt;/strong&gt;
+&lt;span <b>v-if="rating == 1"</b>&gt;☹️Bad.&lt;/span&gt;
+&lt;span <b>v-else-if="rating == 2"</b>&gt;😐Not good.&lt;/span&gt;
+&lt;span <b>v-else-if="rating == 3"</b>&gt;🙂Ok&lt;/span&gt;
+&lt;span <b>v-else-if="rating == 4"</b>&gt;😄Good&lt;/span&gt;
+&lt;span <b>v-else</b>&gt;😍Great!&lt;/span&gt;
+&lt;input type="range" min=1 max=5 <b>v-model:value="rating"</b>&gt;
+</pre>
+
+<pre class="js"><b>data:</b> {
+    <b>rating:</b> {{ rating }}
+}
+</pre>
+
+        <p class="demo">
+            <strong>My rating: </strong>
+            <span v-if="rating == 1">☹️Bad.</span>
+            <span v-else-if="rating == 2">😐Not good.</span>
+            <span v-else-if="rating == 3">🙂Ok</span>
+            <span v-else-if="rating == 4">😄Good</span>
+            <span v-else>😍Great!</span>
+			   <br />
+            <input type="range" min=1 max=5 v-model:value="rating">
+        </p>
+
+        <p class="note"><strong>Note:</strong> elements using <code>v-if</code>, <code>v-else-if</code> and <code>v-else</code> must be sequential sibling elements in order to work together properly. Any element between them will break the chain.</p>
+
+	
+	
+			<h2>🗒️ One last note on <code>data</code></h2>
+	
+			<p>Every example we've seen so far has presented <code>data</code> as an <b>object:</b></p>
+	
+<pre class="js">data: {
+    someProp: someValue
+}
+</pre>
+	
+			<p>That works just fine as long as we only use one component. However, it means <b>all instances of that same component will share the same <code>data</code></b>. (You might have noticed this if you clicked the counter button on this page; the count went up everywhere, not just in that one example.)</p>
+	
+			<p><b>Usually, this isn't what we want</b>; it's usually better for each component to have its <em>own</em> state. Fortunately, all we need to do to achieve this is make <code>data</code> a function that <em>returns</em> an object!</p>
+	
+			<p>You can do it like <b>this</b>:</p>
+
+<pre class="js">data() {
+    return {
+        someProp: someValue	 
+    }
+}
+</pre>
+			
+			<p>Or, for a nice shorthand, we can use an ES6 implicit return, like <b>this</b>:</p>
+	
+<pre class="js">data: () => ({
+    someProp: someValue
+})
+</pre>
+	
+
+			<h2>🤯 There's so much more!</h2>	
+
+			<p><strong>This guide hopefully offers a great way to get started with Vue, but there's a world of possibilities we haven't even discussed yet (including using Vue to create components)!</strong></p>
+
+			<p>If you'd like to continue learning Vue, here are a few resources I found helpful:</p>
+
+			<ul>
+			  <li><b><a href="https://vuejs.org/v2/guide/" target="_blank">The official Vue Documentation</a></b>
+				  <br />It's similar to this guide, and amazingly well-written. A great (and free!) place to start learning Vue.
+			  </li>
+			  <li>
+				  <b><a href="https://laracasts.com/series/learn-vue-2-step-by-step" target="_blank">Laracasts Learn Vue 2: Step By Step</a></b>
+				  <br />While the site seems to be aimed mostly at Laravel learning, there's still a ton of great Vue-specific info in these free videos.
+			  </li>
+			  <li><b><a href="https://www.leveluptutorials.com/tutorials/vuejs-for-everyone" target="_blank">VueJS For Everyone from LevelUp Tuts</a></b>
+				  <br />If you'd like to get a little deeper, this paid video course is an excellent way to do that.
+			  </li>
+			  <li><b><a href="https://www.codecademy.com/learn/learn-vue-js" target="_blank">Codecademy</a></b>
+				  <br />Another paid course, but one that does a good job of reinforcing the ins and outs of how Vue works.
+			  </li>
+			</ul>
+
+			<br><br>
+		 	<p><strong>I hope this guide has been fun and helpful.</strong> Thanks for reading! 👋😄</p>
+		
+	</div>
+
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>

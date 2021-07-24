@@ -1,0 +1,77 @@
+body {
+  background-color: hsl(175, 50%, 75%);
+  color: hsl(175, 40%, 15%);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  text-align: center;
+}
+b {
+  align-items: center;
+  aspect-ratio: 1 / 1;
+  background: #EEE;
+  box-sizing: border-box;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);	
+  display: inline-flex;
+  font-size: clamp(0.5rem, 0.3000rem + 0.4167vw, 0.8rem);
+  height: 4vw;
+  justify-content: center;
+  margin: -0.375vw 0.125vw;
+  overflow: hidden;
+  width: 4vw;
+}
+em {
+  display: none;
+  font-size: clamp(0.5rem, 0.3000rem + 0.4167vw, 0.8rem);
+  margin: 1em 0 0 1em;
+  position: absolute;
+  text-decoration: underline;
+}
+i {
+  display: none;
+  font-size: x-small;
+  left: 0;
+  position: absolute;
+  top: 1vw;
+}
+b, em, i {
+  font-style: normal;
+}
+
+p {
+  margin: 0 auto 1.5rem auto;
+  max-width: 500px;
+}
+.app {
+  cursor: pointer;
+  font-family: ui-monospace, monospace;
+  font-weight: 500;
+}
+.o {
+  background-color:hotpink !important;
+}
+.r {
+  position: relative;
+  user-select: none;
+}
+.r1 b:nth-of-type(2) { background-color: lightpink; }
+.r2 b:nth-of-type(3) { background-color: lightcoral; }
+.r3 b:nth-of-type(4) { background-color: lightsalmon; }
+.r4 b:nth-of-type(5) { background-color: lightgoldenrodyellow; }
+.r5 b:nth-of-type(6) { background-color: Moccasin; }
+.r6 b:nth-of-type(7) { background-color: lightgreen; }
+.r7 b:nth-of-type(8) { background-color: lightseagreen; }
+.r8 b:nth-of-type(9) { background-color: lightcyan; }
+.r9 b:nth-of-type(10) { background-color: lightskyblue; }
+.r11 b:nth-of-type(12) { background-color: lightsteelblue; }
+.r10 b:nth-of-type(11) { background-color: lightblue; }
+.r12 b:nth-of-type(13) { background-color: lightslategray; }
+.r13 b:nth-of-type(14) { background-color: lightgray; }
+.r14 b:nth-of-type(15) { background-color: mistyrose; }
+.r15 b:nth-of-type(16) { background-color: honeydew; }
+.r16 b:nth-of-type(17) { background-color: plum; }
+.r17 b:nth-of-type(18) { background-color: thistle; }
+.r18 b:nth-of-type(19) { background-color: lavender; }
+.r19 b:nth-of-type(20) { background-color: cornsilk; }
+
+@media (min-width: 1024px) {
+  em, i { display: inline-block; }
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Vue Hangman</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.2.0/dist/confetti.browser.min.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet"> <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<main id="app" @keyup="handleKeyPress">
+	<div class="container">
+		<p id="quote" :class="{ 'strike': strikeout, 'highlight': puzzleComplete }">
+			<span v-for="word in splitQuote">
+				<template v-for="letter in word">{{ isRevealed(letter) }}</template>
+			</span>
+			<small v-if="gameOver">
+				—{{ quoteAuthor }}
+			</small>
+		</p>
+
+		<div class="status">
+			<h2>Strikes:</h2>
+			<ul class="status">
+				<li v-for="strike in strikes">{{ strike.icon }}</li>
+			</ul>
+		</div>
+
+		<div id="button-board">
+			<button
+				v-for="letter in letters"
+				@click="guess(letter)"
+				:class="{'strike': badGuesses.includes(letter), 'highlight': guesses.includes(letter)}"
+				:disabled="guesses.includes(letter) || gameOver"
+			>
+				<span class="letter" :class="{'riser': guesses.includes(letter)}">{{ letter }}</span>
+				<span class="background"></span>
+			</button>
+		</div>
+		
+		<div class="status">
+			<p>{{ message }}</p>
+		</div>
+
+		<button id="new-game" @click="newGame" :class="{'highlight': gameOver}">New game</button>
+	</div>
+</>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>

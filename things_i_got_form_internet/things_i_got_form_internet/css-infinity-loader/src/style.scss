@@ -1,0 +1,149 @@
+/* The version of Bourbon used in this Pen was 4.* */
+@import "bourbon";
+
+$circle-width: 40px;
+$border-width: 6px;
+$border-color: #C74066;
+
+@include keyframes(clockwise) {
+  0% {
+    @include transform(rotate(-45deg));
+  }
+  100% {
+    @include transform(rotate(315deg));
+  }
+}
+@include keyframes(not-clockwise) {
+  0% {
+    @include transform(rotate(45deg));
+  }
+  100% {
+    @include transform(rotate(-315deg));
+  }
+}
+
+@include keyframes(lt) {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+  }
+  26% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0;
+  }
+  76% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.container {
+  width: ($circle-width * 2 - $border-width);
+  margin: 60px auto;
+  font-size: 0;
+  position: relative;
+  @include transform-origin( 50% 50% );
+  &:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: $circle-width;
+    height: $circle-width;
+    border: $border-width solid #e5e5e5;
+    border-radius: 100%;
+    @include box-sizing( border-box );
+  }
+  &:after {
+    position: absolute;
+    content: '';
+    z-index: -1;
+    top: 0;
+    right: 0;
+    width: $circle-width;
+    height: $circle-width;
+    border: $border-width solid #e5e5e5;
+    border-radius: 100%;
+    @include box-sizing( border-box );
+  }
+}
+.box {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: $circle-width;
+  height: ($circle-width / 2);
+  opacity: 1;
+  &:before {
+    position: absolute;
+    content: '';
+    width: $circle-width;
+    height: $circle-width;
+    border: {
+      top: $border-width solid $border-color;
+      right: $border-width solid transparent;
+      bottom: $border-width solid transparent;
+      left: $border-width solid transparent;
+    }
+    border-radius: 100%;
+    @include box-sizing( border-box );
+  }
+}
+.lt {
+  margin-right: -$border-width;
+  @extend .box;
+  @include animation(lt 2s linear -2000ms infinite);
+  &:before {
+    top: 0;
+    left: 0;
+    @include animation(not-clockwise 1s linear infinite);
+  }
+}
+.rt {
+  @extend .box;
+  @include animation(lt 2s linear -1000ms infinite );
+  &:before {
+    top: 0;
+    right: 0;
+    @include animation(clockwise 1s linear infinite);
+  }
+}
+.lb {
+  margin-right: -$border-width;
+  @extend .box;
+  @include animation(lt 2s linear -1500ms infinite );
+  &:before {
+    bottom: 0;
+    left: 0;
+    @include animation(not-clockwise 1s linear infinite);
+  }
+}
+.rb {
+  @extend .box;
+  @include animation(lt 2s linear -500ms infinite );
+  &:before {
+    bottom: 0;
+    right: 0;
+    @include animation(clockwise 1s linear infinite);
+  }
+}
+label {
+  margin: 1em 0 1em .5em;
+  font-size: .8em;
+  cursor: pointer;
+}
+input[type="checkbox"]#spin {
+  cursor: pointer;
+  margin: 1em 0 1em 1em;
+  &:checked {
+    ~ .container {
+      @include animation(clockwise 6s linear infinite);
+    }
+  }
+}

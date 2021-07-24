@@ -1,0 +1,196 @@
+$vueBlue: #35495e;
+$vueGreen: #42b883;
+
+* {
+	box-sizing: inherit;
+	font-smoothing: antialiased;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	font-family: 'Source Serif Pro';
+	font-size: 17px;
+	line-height: 1.6em;
+	margin: 0;
+	box-sizing: border-box;
+	background: #f8f8f8;
+	color: #282828;
+}
+
+.app-container {
+	width: 100%;
+	margin: 2rem auto;
+	max-width: 800px;
+	padding: 1.5rem;
+	@media(min-width: 600px){
+		padding: 3rem;
+	}
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Source Sans Pro';
+	color: $vueBlue;
+	line-height: 1;
+}
+
+h1 {
+	font-size: 3rem;
+}
+
+h2 {
+	font-size: 2.2rem;
+	margin-top: 3.4em;
+}
+
+h3 {
+	font-size: 1.6rem;
+	margin-top: 1.8em;
+}
+
+p {
+	position: relative;
+}
+
+pre {
+	background: $vueBlue;
+	color: #fff;
+	text-wrap: wrap;
+	overflow-x: auto;
+	overflow-y: visible;
+	b {
+		color: lighten($vueBlue, 50%);
+	}
+	input {
+		background: inherit;
+		border: none;
+		color: inherit;
+		font-size: inherit;
+		font-family: inherit;
+		display: inline;
+		padding: 0;
+		width: auto;
+		margin: none;
+		margin-right: -.3em;
+		border: none;
+		&:focus {
+			outline: none;
+		}
+	}
+	&, code {
+		font-family: 'Fira Mono';
+		font-size: .9em;
+	}
+	&.js {
+		
+		
+		&:before {
+			content: '💻 JAVASCRIPT (Vue instance):';
+		}
+	}
+}
+
+code {
+	background: lighten($vueBlue, 60%);
+	padding: .1em .2em;
+}
+
+pre, .demo, .note {
+	line-height: 1.8;
+	padding: 4em 2em 2em;
+	border-radius: 0px;
+	position: relative;
+	margin: 2em 0;
+	&:before {
+		color: #bbb;
+		font-family: 'Source Sans Pro';	
+		content: '💻 HTML (Vue template):';
+		position: absolute;
+		top: 0;
+		left: 0;	
+		background: rgba(0,0,0,.2);
+		display: block;
+		width: 100%;
+		border-radius: inherit;
+		padding: .4em .4em .4em .8em;
+		box-sizing: border-box;
+	}
+}
+
+ul {
+	margin: 2rem 0;
+}
+
+* + li {
+ margin-top: 1em;
+}
+
+.demo li {
+	margin-top: 0rem;
+}
+
+.demo, p.note {
+	background: inherit;
+	border: 1px solid $vueGreen;
+	font-family: sans-serif;
+	&:before {
+		content: '👀 OUTPUT:';
+		color: #fff;
+		background: $vueGreen;
+	}
+}
+
+p.note {
+	font-family: 'Source Serif Pro';
+	border-color: $vueGreen;
+	background: lighten($vueGreen, 40%);
+	border: none;
+	padding: 1em .5em 1em 2rem;
+	border-left: 8px solid $vueGreen;
+	&:before {
+		// background: $vueGreen;
+		// content: '💡NOTE:';
+		content: '💡';
+		background: transparent;
+		top: .4em;
+		font-size: 1.5em;
+		left: .15em;
+		margin: 0;
+		padding: 0;
+		position: absolute;
+	}
+}
+
+input {
+	padding: .5em;
+	width: 100%;
+	display: inline-block;
+	font-size: .9em;
+	&[type=range]{
+		padding: 0;
+		width: auto;
+		display: inline-block;
+	}
+}
+
+.comment {
+	color: #aaa;
+}
+
+.highlight {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	left: -.6em;
+	padding: .2em 0 .2em .6em;
+	background: linear-gradient(to right, lighten($vueBlue, 10%), transparent);
+}
+
+.alert {
+	background: red;
+	color: white;
+}
+
+[disabled]{
+	opacity: .5;
+}

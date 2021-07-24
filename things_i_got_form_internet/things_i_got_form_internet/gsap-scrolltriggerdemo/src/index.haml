@@ -1,0 +1,31 @@
+- w = 1240
+- h = 874
+
+.loader.df.aic.jcc
+  %div
+    %h1 Loading
+    %h2.loader--text 0%
+
+.demo-wrapper
+  %header.df.aic.jcc
+    %div
+      %h1 ScrollTrigger
+      %h2 demo
+
+  %section.demo-text
+    .wrapper.text
+      ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+  - (1..4).each do |i|
+    %section.demo-gallery
+      %ul.wrapper
+        - (1..rand(3..4)).each do |i|
+          %li
+            %img{:src=>"https://source.unsplash.com/random/#{w}x#{h}?sig=#{rand(0..206)}", :width => w, :height => h}
+
+  %section.demo-text
+    .wrapper.text
+      ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+  %footer.df.aic.jcc
+    %p Images from <a href="https://unsplash.com/">Unsplash</a>

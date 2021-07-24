@@ -1,0 +1,239 @@
+//CHANGE THIS NUMBER to alter the board size! ❤️🔷⭐️🍀
+const size = 12;
+
+
+
+const ColorButton = (props) => {
+	return (
+		<button	className="tile buttonTile" style={{backgroundColor: props.color.rgb}} onClick={props.handleClick}>
+			 <span className={props.colorblind ? 'pop-in' : undefined}>{props.color.symbol}</span>
+		</button>
+	);
+}
+
+const ColorblindToggle = (props) => {
+	return(
+		<div className="toggle">
+			<input type="checkbox" id="colorblindMode" checked={props.colorblind}/>
+			<label htmlFor="colorblindMode" onClick={props.handleColorblindToggle}>Colorblind<br/>Mode
+				<div className="toggle-outer">
+					<div className="toggle-inner"></div>
+				</div>
+			</label>
+		</div>
+	);
+}
+
+const Tile = (props) => {
+	const { absorbed, color, colorblind, tileKey } = props
+	return (
+		<div className={absorbed ? 'absorbed tile' : 'tile'} style={{backgroundColor: color.rgb}} data-key={tileKey}>
+			<span className={colorblind && 'pop-in'}>{color.symbol}</span>
+		</div>
+	);
+}
+
+class GameBoard extends React.Component {
+	constructor(props){
+		super(props);
+			this.state = {
+				boardSize: size,
+				board: [],
+				clicks: 0,
+				colorblindMode: false,
+				//You could theoretically add more colors here
+				colors: [
+					{
+						rgb: 'rgb(255, 50, 50)', //red 
+						symbol: '❤️'
+					},
+					{
+						rgb: 'rgb(24, 187, 255)', //blue 
+						symbol: '🔷'
+					},
+					{
+						rgb: 'rgb(255, 224, 17)', //yellow 
+						symbol: '⭐️'
+					},
+					{
+						rgb: 'rgb(51, 153, 68)', //green 
+						symbol: '🍀'
+					},	
+					
+					// UNCOMMENT to add more (completely arbitrary)colors! 🍊🎀
+					
+					// {
+					// 	rgb: 'rgb(235, 168, 11)', //orange 
+					// 	symbol: '🍊'
+					// },
+					// {
+					// 	rgb: 'rgb(255, 105, 180)', //pink 
+					// 	symbol: '🎀'
+					// },
+				],
+				currentColor: ''
+			}
+    }
+	
+	generateGameBoard = () => {
+		const x = this.state.boardSize;
+		const board = [];
+		let key = 1;
+		for(let i=0; i < x*x; i++){
+				const randomColor = Math.floor(Math.random() * this.state.colors.length);
+				board.push({ color: this.state.colors[randomColor], key: key, absorbed: false });
+				key++;
+		}
+		this.setState({ 
+			board: board,
+			currentColor: board[0].color.rgb,
+			clicks: 0,
+		});
+	}
+	
+	returnSymbol = (match) => {
+		let symbol;
+		this.state.colors.filter(color => {
+			color.rgb == match ? symbol = color.symbol : null;
+		});
+		return symbol;
+	}
+	
+	componentWillMount(){
+		this.generateGameBoard();
+	}
+
+	componentDidMount(){
+		this.handleClick();
+	}
+
+	getTheAbsorbed = () => {
+		const size = this.state.boardSize;
+		let currentPool = [];											
+		const roundup = () => {
+			this.state.board.forEach((tile, i) => {
+				if(
+					((tile.color.rgb == this.state.currentColor
+						&& (
+								 (i % size != 0 && currentPool.includes(this.state.board[i-1]))
+							|| ((i +1) % size != 0 && currentPool.includes(this.state.board[i+1]))
+							|| (this.state.board[i+size] && currentPool.includes(this.state.board[i+size]))
+							|| (this.state.board[i-size] && currentPool.includes(this.state.board[i-size]))
+						)	
+					)||(
+						i === 0
+					))
+				&& (!currentPool.includes(tile))){
+						currentPool.push(tile);
+						roundup();
+				} 
+			})
+		}
+		roundup();
+		return currentPool;
+	}
+	
+	propagate = (e, arr) => {
+		const size = this.state.boardSize;
+		const color = e ? e.target.style.backgroundColor : this.state.currentColor;
+		const roundup = () => {
+			this.state.board.forEach((tile, i) => {
+				if(
+					((tile.color.rgb == color
+						&& (
+								 (i % size != 0 && arr.includes(this.state.board[i-1]))
+							|| ((i +1) % size != 0 && arr.includes(this.state.board[i+1]))
+							|| (this.state.board[i+size] && arr.includes(this.state.board[i+size]))
+							|| (this.state.board[i-size] && arr.includes(this.state.board[i-size]))
+						)	
+					)||(
+						i === 0
+					))
+				&& (!arr.includes(tile))){
+						arr.push(tile);
+						roundup();
+				} 
+			})
+		}
+		roundup();
+		return arr;
+	}
+	
+	
+	
+	handleClick = (e) => {
+		const clicked = e ? e.target.style.backgroundColor : this.state.currentColor;
+		const size = this.state.boardSize;
+		if(clicked != this.state.currentColor || !e){	
+			
+			const prevPool = this.getTheAbsorbed();			
+			const currentPool = this.propagate(e, prevPool);
+						
+			const newBoard = this.state.board.map((tile, i) => {
+				if(currentPool.includes(tile)){
+					return { color: {rgb: clicked, symbol: this.returnSymbol(clicked)}, key: tile.key, absorbed: true }
+				} else {
+					return tile;
+				}
+			});
+			this.setState({
+				board: newBoard,
+				currentColor: clicked,
+				clicks: e ? this.state.clicks + 1 : this.state.clicks
+			});					
+						
+			this.endgameCheck();
+
+		} else {
+			console.log('The corner is already the clicked color. Choose another.')
+		}
+	}
+	
+	endgameCheck(){
+		const size = this.state.boardSize;
+		setTimeout(()=>{
+			const absorbed = this.state.board.filter(tile => {
+				if (tile.color.rgb == this.state.currentColor){ 
+					return tile.color.rgb;
+				} else {
+					return;
+				}
+			});
+			if(absorbed.length === size * size){
+				alert(`You won a ${size}x${size} board in ${this.state.clicks} clicks! (Hint: refresh to start a new game, or change the "size" constant at the top of the JS window to a different number!)`);
+			}
+		}, 200);
+	}
+	
+	handleColorblindToggle = (e) => {
+		e.preventDefault();
+		this.setState({ colorblindMode: !this.state.colorblindMode });
+	}
+	
+	render(){
+		const style = {
+			gridTemplateColumns: `repeat(${this.state.boardSize}, 1fr)`,
+			gridTemplateRows: `repeat(${this.state.boardSize}, 1fr)`
+		}
+		return(
+			<React.Fragment>
+				<div id="optionsBar">
+					<h2>{this.state.clicks}</h2>
+					<ColorblindToggle handleColorblindToggle={this.handleColorblindToggle} colorblind={this.state.colorblindMode}/>
+				</div>
+				<div id="gameBoard" style={style}>
+					{this.state.board.map(tile => {
+						return( <Tile color={tile.color} key={tile.key} tileKey={tile.key} currentColor={this.state.currentColor} colorblind={this.state.colorblindMode} absorbed={tile.absorbed}/>);
+					})}
+				</div>
+				<div id="buttonBoard">
+					{this.state.colors.map(color => {
+						return(<ColorButton color={color} handleClick={this.handleClick} key={color.rgb} size={this.state.size} colorblind={this.state.colorblindMode} />);
+					})}
+				</div>
+			</React.Fragment>
+		);
+	}
+}
+
+ReactDOM.render(<GameBoard />, document.querySelector('#app'));

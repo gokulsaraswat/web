@@ -1,0 +1,245 @@
+$speed: 12000ms;
+
+body {
+  background: #fff;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  font-family: 'Anton', sans-serif;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  position: relative;
+  display: grid;
+  grid-template-rows: repeat(20, 5vh);
+  grid-template-columns: repeat(20, 5vw);
+  transform-style: preserve-3d;
+}
+
+.monitor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+.trigger {
+  position: relative;
+  
+  @for $i from 1 through 20 {
+    @for $j from 1 through 20 {
+      $key: ($i - 1) * 20 + $j;
+      
+      &:nth-child(#{$key}) {
+        &:hover ~ .monitor {
+          .camera {
+            &.-x {
+              transform: rotateX(($i - 2) * 2deg - 45);
+            }
+            
+            &.-y {
+              transform: rotateY(($j - 2) * -2deg - 16);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.camera {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: 500ms;
+  
+  &.-x {
+    transform: rotateX(-30deg);
+  }
+  
+  &.-y {
+    transform: rotateY(-45deg);
+  }
+}
+
+.world {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translateY(200px);
+}
+
+div {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.hole {
+  transform: translate(-50px, -50px);
+
+  .wall {
+    width: 100px;
+    height: 300px;
+    background: #ccc;
+    
+    &:nth-child(1) {
+      transform: translateZ(50px) scaleX(1.5);
+      background: #fff;
+    }
+    
+    &:nth-child(2) {
+      transform: rotateY(90deg) translateZ(50px) scaleX(1.5);
+      background: #fff;
+    }
+    
+    &:nth-child(3) {
+      transform: rotateY(-90deg) translateZ(50px);
+      background: linear-gradient(#eee, #000);
+    }
+    
+    &:nth-child(4) {
+      transform: rotateY(180deg) translateZ(50px);
+      background: linear-gradient(#ccc, #000);
+    }
+    
+    &:nth-child(5) {
+      transform-origin: 0 100%;
+      transform: translateY(-100px) translateZ(-50px) rotateX(20deg);
+      background: #fff;
+      height: 100px;
+      animation: cover $speed ease-in-out infinite;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(#eee, #ddd);
+        transform: translateZ(1px);
+      }
+    }
+  }
+}
+
+.plug {
+  transform: translate(-45px, -50px);
+
+  .wall {
+    width: 90px;
+    height: 90px;
+    background: #ccc;
+    
+    &:nth-child(1) {
+      transform: translateZ(45px);
+    }
+    
+    &:nth-child(2) {
+      transform: rotateY(90deg) translateZ(45px);
+    }
+    
+    &:nth-child(3) {
+      transform: rotateX(90deg) translateZ(45px);
+    }
+  }
+  
+  .in {
+    animation: plugIn $speed linear infinite;
+  }
+}
+
+.set {
+  animation: belt $speed linear infinite;
+  
+  @for $i from 1 through 30 {
+    $r: random(200);
+    $g: random(200);
+    $b: random(200);
+
+    &:nth-child(#{$i}) {
+      animation-delay: $i * $speed / -10;
+      
+      .in,
+      .-cover {
+        animation-delay: $i * $speed / -10;
+      }
+      
+      .plug {
+        .wall {
+          &:nth-child(1) {
+            background: linear-gradient(0deg, rgb($r - 20, $g - 20, $b - 20), rgb($r + 10, $g + 10, $b + 10));
+          }
+          
+          &:nth-child(2) {
+            background: linear-gradient(0deg, rgb($r, $g, $b), rgb($r + 30, $g + 30, $b + 30));
+          }
+          
+          &:nth-child(3) {
+            background: linear-gradient(90deg, rgb($r + 20, $g + 20, $b + 20), rgb($r + 50, $g + 50, $b + 50));
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes cover {
+  0% {
+    transform: translateY(-100px) translateZ(-50px) rotateX(-90deg);
+  }
+  
+  10% {
+    transform: translateY(-100px) translateZ(-50px) rotateX(-90deg);
+  }
+  
+  15% {
+    transform: translateY(-100px) translateZ(-50px) rotateX(20deg);
+  }
+  
+  65% {
+    transform: translateY(-100px) translateZ(-50px) rotateX(20deg);
+  }
+  
+  70% {
+    transform: translateY(-100px) translateZ(-50px) rotateX(-90deg);
+  }
+  
+  100% {
+    transform: translateY(-100px) translateZ(-50px) rotateX(-90deg);
+  }
+}
+
+@keyframes plugIn {
+  0% {
+    transform: translateY(-1000px);
+  }
+  
+  54% {
+    transform: translateY(15px);
+  }
+  
+  55% {
+    transform: translateY(5px);
+  }
+  
+  100% {
+    transform: translateY(5px);
+  }
+}
+
+@keyframes belt {
+  0% {
+    transform: translateZ(-800px);
+  }
+  
+  100% {
+    transform: translateZ(1200px);
+  }
+}
+

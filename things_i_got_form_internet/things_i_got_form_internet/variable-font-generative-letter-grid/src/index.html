@@ -1,0 +1,54 @@
+<div id="app">
+	<div id="grid">
+		<div v-for="cell, index in grid" class="cell" :class="[colorize && 'colorized', getCellClasses(cell)]" :data-weight="cell.weight" :style="{backgroundColor: cell.color.bg, color: cell.color.fg}" @mouseover="hoverLetter" @click="randomLetter" :key="index" :data-serif="cell.serif">
+			{{ cell.blank > blankPercentage ? cell.char : '' }}
+		</div>
+	</div>
+
+	<div class="toolbar" :class="isToolbarOpen && 'shown'">
+
+		<div :aria-hidden="!isToolbarOpen" :hidden="!isToolbarOpen">
+			<div class="group">
+				<label for="characters">Character set:</label>
+				<textarea id="characters" @input="regenerateGrid" v-model="characters"></textarea>
+			</div>
+
+			<div class="group">
+				<label for="serifPercentage">Chances of serif cell: <span class="float-right">{{ serifPercentage }}%</span></label>
+				<input id="serifPercentage" @input="regenerateGrid" v-model="serifPercentage" type="range" min="0" max="100"></input>
+			</div>
+
+			<div class="group">
+				<label for="blankPercentage">Chances of blank cell: <span class="float-right">{{ blankPercentage }}%</span></label>
+				<input id="blankPercentage" @input="regenerateGrid" v-model="blankPercentage" type="range" min="0" max="100"></input>
+			</div>
+
+			<div class="group">
+				<label for="roundPercentage">Chances of round cell: <span class="float-right">{{ roundPercentage }}%</span></label>
+				<input id="roundPercentage" @input="regenerateGrid" v-model="roundPercentage" type="range" min="0" max="100"></input>
+			</div>
+
+			<div class="group">
+				<input type="checkbox" v-model="colorize" id="colorize">
+				<label for="colorize">Colorize cells</label>
+
+				<input type="checkbox" v-model="changeCharOnClick" id="changeCharOnClick">
+				<label for="changeCharOnClick">Change characters on click</label>
+
+				<input type="checkbox" v-model="changeCharOnHover" id="changeCharOnHover">
+				<label for="changeCharOnHover">Change characters on hover</label>
+
+				<template v-if="changeCharOnClick || changeCharOnHover">
+					<input type="checkbox" v-model="fancyCharShuffle" id="fancyCharShuffle">
+					<label for="fancyCharShuffle">Fancy character shuffle</label>
+				</template>
+			</div>
+
+			<button id="shuffle" @click="() => { regenerateGrid(true) }">Generate New Grid</button>
+		</div>
+
+		<button id="hamburger" @click="toggleToolbar" :class="isToolbarOpen && 'shown'">
+			{{ menuBtnText }}
+		</button>
+	</div>
+</div>

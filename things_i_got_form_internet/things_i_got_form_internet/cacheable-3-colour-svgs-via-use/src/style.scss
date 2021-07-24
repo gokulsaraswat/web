@@ -1,0 +1,215 @@
+// This is an extension of the two colour 'SVG use' approach that has been documented for some time (e.g. https://css-tricks.com/lodge/svg/21-get-two-colors-use/)
+// This example includes changing the opacity on some lighter elements to create a third colour
+
+// A full explanation about this approach can be found here: https://twitter.com/_AntiAlias_/status/1416989388429352961?s=20
+
+
+// Defs ---------
+
+// neutral colors
+$light-theme-fgd: hsl(240,8%,6%);
+$light-theme-fgd-weaker: hsl(240,8%,50%); // weaker contrast
+$light-theme-bgd: hsl(240,8%,94%);
+$light-theme-bgd-stronger: white; // stronger contrast
+
+$dark-theme-fgd: white;
+$dark-theme-fgd-weaker: hsl(240,8%,56%);
+$dark-theme-bgd: hsl(240,8%,12%);
+$dark-theme-bgd-stronger: hsl(240,8%,6%);
+
+// neutral colors (as applied to svg icons; note reversal of contrast to make 3D icons 'lit' naturally for both themes)
+$light-theme-icon-light: $light-theme-fgd-weaker;
+$light-theme-icon-dark: $light-theme-fgd;
+$dark-theme-icon-light: $dark-theme-fgd;
+$dark-theme-icon-dark: $dark-theme-fgd-weaker;
+
+// turquoise (same colors are used for both themes)
+$icon-color-a-light: hsl(175,95%,40%);
+$icon-color-a-dark: hsl(195,100%,30%);
+
+// amber (same colors are used for both themes)
+$icon-color-b-light: hsl(40,100%,50%);
+$icon-color-b-dark: hsl(14,78%,54%);
+
+
+// typeface (an awesome one by Jeremy Tribby)
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400&display=swap');
+
+// standard transition
+$transition: all .1s ease-in-out;
+
+// changing the color state of an SVG may cause it to jiggle in Safari
+%svg-safari-jiggle-fix {
+	-webkit-backface-visibility: hidden;
+	-webkit-transform: translateZ(0) scale(1);
+	font-smoothing: antialiased !important;
+}
+
+
+
+// Rules ---------
+
+body {
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	min-height: 100vh;
+	min-width: 375px;
+	color: $light-theme-fgd;
+	background: $light-theme-bgd;
+	font-family: 'Barlow', sans-serif;
+	font-size: 14px;
+	transition: $transition;
+	&[data-theme='dark'] {
+		color: $dark-theme-fgd;
+		background: $dark-theme-bgd;
+	}
+}
+
+.layout {
+	display: grid;
+	grid-template-rows: 20fr auto 21fr; // +1fr to shift icons up to optical center
+	grid-template-columns: 1fr 2fr 1fr;
+	grid-template-areas: 
+		"header header header"
+    ". icons ."
+    "footer footer footer";
+	min-height: 192px;
+	flex: 1 0 0;
+	max-width: 1200px;
+}
+
+.icons {
+	display: flex;
+	grid-area: icons;
+	button {
+		all: unset;
+		position: relative;
+  	cursor: pointer;
+		@media (hover: hover) {
+			&::before {
+				// hover background 
+				// Making this a (psuedo) child of label helps with transitions sync, however pseudo elements revealed on hover
+				// sometimes require an additional touch on mobile devices, so disabed in this case
+				content: '';
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				opacity: 0;
+				background: $light-theme-bgd-stronger;
+				z-index: -1;
+				border-radius: 10%;
+				transition: $transition;
+				[data-theme='dark'] & {
+					background: $dark-theme-bgd-stronger;
+				}
+			}
+		}
+		&:hover {
+			svg, &::before {
+				opacity: 1;
+			}
+			svg {
+				color: $icon-color-a-light;
+				fill: $icon-color-a-dark;
+			}
+		}
+		&.alt:hover {
+			svg {
+				color: $icon-color-b-light;
+				fill: $icon-color-b-dark;
+			}
+		}
+	}
+}
+
+svg {
+	color: $light-theme-icon-light;
+	fill: $light-theme-icon-dark;
+	@extend %svg-safari-jiggle-fix;
+	[data-theme='dark'] & {
+		color: $dark-theme-icon-light;
+		fill: $dark-theme-icon-dark;
+	}
+	&.defs {
+    position: absolute;
+    height: 0;
+    width: 0;
+  }
+	&.icon {
+		width: 60%;
+		margin: 20%;
+		opacity: .6;
+		transition: $transition;
+	}
+}
+
+.segmented-control {
+	grid-area: header;
+	justify-self: center;
+	align-self: end;
+	display: flex;
+	width: 144px;
+	margin: 27px 0;
+	height: 27px;
+	border-radius: 5px;
+	background: $light-theme-bgd-stronger;
+	z-index: 1;
+	transition: $transition;
+	[data-theme='dark'] & {
+		background: $dark-theme-bgd-stronger;
+		label {
+			color: $dark-theme-fgd-weaker;
+			&:last-child::before {
+				background-color: $dark-theme-bgd;
+			}
+		}
+	}
+	input {
+		position: absolute;
+		transform: scale(0); // not 'hidden' for better accessibilty
+		&:checked + label {
+			color: inherit;
+			~ label:last-child::before {
+				// if first radio checked shift background of last radio left
+				// this approach can be extended to 3 or 4 segments, but gets messy beyond 4
+				// 3 value control example can be found here: https://codepen.io/scootman/pen/qBEPoLO
+				transform: translate(-100%); 
+			}
+		}
+	}
+	label {
+		flex: 1 0 0px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		padding-bottom: 1px;
+		color: $light-theme-fgd-weaker;
+		transition: $transition;
+		cursor: pointer;
+		&:hover {
+			color: inherit;
+		}
+		&:last-child::before {
+			// checked background
+			// placed on light item so it can 'detect' if radios are check before it in the DOM &
+			// and allows for sliding transition effect
+			content: '';
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			background-clip: padding-box;
+			background-color: $light-theme-bgd;
+			border-radius: 5px;
+			border: 2px solid transparent;
+			z-index: -1;
+			transition: transform .25s ease-in-out, background-color .1s ease-in-out ;
+		}
+	}
+}
+

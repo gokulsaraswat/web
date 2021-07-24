@@ -1,0 +1,87 @@
+body {
+  font-family: system-ui;
+  font-size: 70%;
+}
+
+#wrapper {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+canvas {
+  width: 100vw;
+  height: 100vh;
+  background: black;
+}
+
+#controls {
+  box-sizing: border-box;
+  width: 10vw;
+  min-width: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+}
+#controls .controls__button {
+  grid-area: 1/1/2/2;
+  justify-self: stretch;
+  align-self: stretch;
+  padding: 8px;
+  background: black url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z" fill="white" /></svg>') no-repeat center center;
+  background-size: 40% 40%;
+  border: 2px solid white;
+  border-right-width: 0px;
+  cursor: pointer;
+}
+#controls .controls__button:hover {
+  background: white url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z" fill="black" /></svg>') no-repeat center center;
+  background-size: 40% 40%;
+  border-color: black;
+}
+#controls .controls__button.button--on {
+  background: black url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z" fill="white" /></svg>') no-repeat center center;
+  background-size: 40% 40%;
+}
+#controls .controls__button.button--on:hover {
+  background: white url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z" fill="black" /></svg>') no-repeat center center;
+  background-size: 40% 40%;
+}
+#controls .controls__button span {
+  visibility: hidden;
+}
+#controls .controls__credit {
+  box-sixing: border-box;
+  padding: 8px 8px 0px;
+  background-color: white;
+  border: 2px solid black;
+  color: black;
+}
+#controls .controls__credit:nth-of-type(1) {
+  grid-area: 1/2/2/3;
+  border-width: 2px 0px;
+}
+#controls .controls__credit:nth-of-type(1) p {
+  padding-bottom: 8px;
+}
+#controls .controls__credit:nth-of-type(1) svg {
+  width: 80px;
+  padding-top: 8px;
+}
+#controls .controls__credit:nth-of-type(2) {
+  grid-area: 1/3/2/4;
+  border-left-width: 0px;
+}
+#controls p {
+  text-align: center;
+}
+#controls p span {
+  display: none;
+}
+#controls svg {
+  width: 60px;
+}

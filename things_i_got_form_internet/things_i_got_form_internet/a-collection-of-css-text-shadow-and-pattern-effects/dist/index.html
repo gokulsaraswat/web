@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - A collection of CSS text-shadow and pattern effects</title>
+  <link rel="stylesheet" href="./style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- I made this pen to try out and illustrate some of the subtle shadow effects you can create using just text-shadow and transitions.  The pattern effect also uses a small piece of SVG.
+
+Inspired by this animated gif I saw on dribbble (https://dribbble.com/shots/1881907-Love?list=shots&sort=recent&timeframe=now&offset=18).
+
+I’ve included the Sass mixins I use to make the text-shadow effect, but you could also just use compass which has these mixins baked straight in.
+
+The CSS only effects (first 4) work in Chrome/Firefox/Safari/IE10+.
+
+The final pattern effect works perfectly in Chrome, Firefox and IE seems to lose the text-shadow for some reason and it completely flips out in Safari!
+-->
+
+
+<h1>A collection of CSS Text shadow and pattern effects <a href="https://twitter.com/AshNolan_" target="blank">created by @AshNolan_</a></h1>
+<h2 class="headingOuter">Push down (shadow effect)</h2>
+<div class="headingWrapper color-bright">
+  <a href="" class="header header--pushDown header--shadow" title="HOVER ME">HOVER ME</a>
+</div>
+<div class="headingWrapper">
+  <a href="" class="header header--pushDown header--shadow" title="HOVER ME">HOVER ME</a>
+</div>
+
+<h2 class="headingOuter">Raise up (shadow effect)</h2>
+<div class="headingWrapper color-bright">
+  <a href="" class="header header--raiseUp header--shadow">HOVER ME</a>
+</div>
+<div class="headingWrapper">
+  <a href="" class="header header--raiseUp header--shadow">HOVER ME</a>
+</div>
+
+<h2 class="headingOuter">Push down (merging into page)</h2>
+<div class="headingWrapper color-bright">
+  <a href="" class="header header--pushDown">HOVER ME</a>
+</div>
+<div class="headingWrapper">
+  <a href="" class="header header--pushDown">HOVER ME</a>
+</div>
+
+
+<h2 class="headingOuter">Raise up (emerging from page)</h2>
+<div class="headingWrapper color-bright">
+  <a href="" class="header header--raiseUp">HOVER ME</a>
+</div>
+<div class="headingWrapper">
+  <a href="" class="header header--raiseUp">HOVER ME</a>
+</div>
+
+<h2 class="headingOuter">Raised up (emerging from bg) with pattern</h2>
+<div class="headingWrapper color-bright">
+  <a href="#" class="header header--raiseUp header--svg">
+    <svg>
+      <defs>
+        <linearGradient id="stripedColor" x1="0" x2="0" y1="0%" y2="4%" spreadMethod="repeat">
+          <stop offset="0%" stop-color="#e62915"/>
+          <stop offset="50%" stop-color="#e62915"/>
+          <stop offset="51%" stop-color="#fff"/>
+          <stop offset="99%" stop-color="#fff"/>
+          <stop offset="100%" stop-color="#e62915"/>
+        </linearGradient>
+      </defs>
+      <text y="1.2em">Hover Me</text>
+    </svg>
+  </a>
+</div>
+<div class="headingWrapper">
+  <a href="#" class="header header--raiseUp header--svg">
+    <svg>
+      <defs>
+        <linearGradient id="striped" x1="0" x2="0" y1="0%" y2="4%" spreadMethod="repeat">
+          <stop offset="0%" stop-color="#e62915"/>
+          <stop offset="50%" stop-color="#e62915"/>
+          <stop offset="51%" stop-color="#fff"/>
+          <stop offset="99%" stop-color="#fff"/>
+          <stop offset="100%" stop-color="#e62915"/>
+        </linearGradient>
+      </defs>
+      <text y="1.2em">Hover Me</text>
+    </svg>
+  </a>
+</div>
+<!-- partial -->
+  
+</body>
+</html>

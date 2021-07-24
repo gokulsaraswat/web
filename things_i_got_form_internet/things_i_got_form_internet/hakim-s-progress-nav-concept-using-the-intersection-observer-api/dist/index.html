@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Hakim&#39;s Progress Nav Concept using the Intersection Observer API</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<nav>
+
+	<ul>
+    <li><a href="#intro">Intro</a></li>
+		<li>
+			<a href="#first">First section</a>
+			<ul>
+				<li>
+          <a href="#second">Second section</a>
+          <ul>
+            <li>
+              <a href="#third">Third section</a>
+            </li>
+          </ul>
+        </li>
+			</ul>
+		</li>
+		<li>
+			<a href="#fourth">Fourth section</a>
+      <ul>
+        <li><a href="#fifth">Fifth section</a></li>
+        <li><a href="#sixth">Sixth section</a></li>
+      </ul>
+		</li>
+    <li><a href="#seventh">Seventh section</a></li>
+    <li><a href="#eighth">Eighth section</a></li>
+	</ul>
+  
+  <svg xmlns="http://www.w3.org/2000/svg">
+    <path />
+  </svg>
+  
+</nav>
+
+<article id="top">
+  
+  <div class="subheading">An intersectionObserver approach to</div>
+  <h1>Hakim's Progress Nav Concept</h1>
+  
+  <section id="intro">
+    <h2>Intro</h2>
+    <p>Hakim el Hattab published a <a href="https://codepen.io/hakimel/pen/BpKNPg">Progress Nav concept</a> on Codepen back in 2017. As pointed out by Chris in <a href="https://css-tricks.com/table-of-contents-with-intersectionobserver/">a recent blog post</a> over at CSS Tricks, we now have the Intersection Observer API which saves us a good amount of hassle. Here's my attempt at an <code>intersectionObserver</code> version of Hakim's amazing nav concept.</p>
+  </section>
+  
+  <section id="first">
+    <h2>First section</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisl, pharetra et odio non, sollicitudin bibendum enim. Integer posuere, est et posuere feugiat, nisi nunc auctor nisi, eu tristique ipsum justo ut tellus. Phasellus molestie ultricies sodales. Nunc nec ligula placerat, vehicula orci a, tincidunt ante. Donec ac metus quis nunc cursus tincidunt.</p>
+  <p>Vivamus sed ullamcorper ex. Suspendisse potenti. Nam sodales hendrerit enim, non fringilla mauris gravida maximus. Sed pharetra purus eget quam auctor luctus. Aenean arcu nulla, aliquam ut consectetur non, tincidunt eget sem. Aliquam tristique mattis urna, a posuere justo dapibus nec. Aenean non lacinia nisl. Aenean ac bibendum eros. Integer posuere enim tempor auctor venenatis. Etiam convallis nunc at eros ultrices, et elementum erat ultrices.</p>
+  </section>
+  
+  <section id="second">
+    <h2>Second section</h2>
+    <p>Phasellus congue felis quis arcu dignissim, pulvinar mollis ante pretium. Sed ac auctor quam. Mauris ac tellus et quam porta mattis quis quis quam. Sed tristique gravida mauris, eget eleifend nunc accumsan in.</p>
+    <p>Donec consequat fringilla diam, sit amet aliquam magna faucibus vel. Sed sagittis id nisi et facilisis. Aliquam erat volutpat. Mauris arcu nunc, euismod at enim at, porttitor laoreet lorem. In molestie dui at augue aliquet, in tincidunt nisi dictum. Donec sagittis enim vestibulum est elementum, vel lobortis libero suscipit.</p>
+  <p>Vivamus sed ullamcorper ex. Suspendisse potenti. Nam sodales hendrerit enim, non fringilla mauris gravida maximus. Sed pharetra purus eget quam auctor luctus. Aenean arcu nulla, aliquam ut consectetur non, tincidunt eget sem. Aliquam tristique mattis urna, a posuere justo dapibus nec. Aenean non lacinia nisl. Aenean ac bibendum eros. Integer posuere enim tempor auctor venenatis. Etiam convallis nunc at eros ultrices, et elementum erat ultrices.</p>
+  </section>
+  
+  <section id="third">
+    <h2>Third section</h2>
+    <p>Etiam id ex dolor. Curabitur quis tellus vitae neque finibus suscipit. Donec vel nisl ac justo mattis molestie. Vivamus in interdum est. Fusce sed malesuada tellus. Suspendisse imperdiet condimentum sem in tristique. Donec faucibus dui non pharetra cursus. Praesent congue turpis leo, vitae porttitor elit fringilla vel. Phasellus ut aliquet augue. Donec egestas luctus placerat.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisl, pharetra et odio non, sollicitudin bibendum enim. Integer posuere, est et posuere feugiat, nisi nunc auctor nisi, eu tristique ipsum justo ut tellus. Phasellus molestie ultricies sodales. Nunc nec ligula placerat, vehicula orci a, tincidunt ante. Donec ac metus quis nunc cursus tincidunt.</p>
+  <p>Vivamus sed ullamcorper ex. Suspendisse potenti. Nam sodales hendrerit enim, non fringilla mauris gravida maximus. Sed pharetra purus eget quam auctor luctus. Aenean arcu nulla, aliquam ut consectetur non, tincidunt eget sem. Aliquam tristique mattis urna, a posuere justo dapibus nec. Aenean non lacinia nisl. Aenean ac bibendum eros. Integer posuere enim tempor auctor venenatis. Etiam convallis nunc at eros ultrices, et elementum erat ultrices.</p>
+    <p>In aliquam maximus dui, nec iaculis nunc gravida et. Cras dapibus porta est, sed finibus arcu viverra in. Vivamus volutpat placerat urna, non varius sapien tempor sit amet. Cras quis dictum enim. Vestibulum ac rhoncus diam, non venenatis dolor. Curabitur ut velit tincidunt, pulvinar dolor sit amet, tincidunt arcu. Integer at ipsum eu ex blandit consectetur.</p>
+  </section>
+  
+  <section id="fourth">
+    <h2>Fourth section</h2>
+    <p>Aenean purus ex, auctor id dictum in, consequat ac lacus. Fusce aliquam tellus sed ante porttitor eleifend. Nam rutrum vulputate arcu sed euismod. Fusce diam nunc, cursus eget leo eget, interdum tempus arcu. Maecenas vestibulum faucibus dolor non fermentum. Donec tortor dui, aliquet vitae mauris id, condimentum eleifend felis.</p>
+    <p>In aliquam maximus dui, nec iaculis nunc gravida et. Cras dapibus porta est, sed finibus arcu viverra in. Vivamus volutpat placerat urna, non varius sapien tempor sit amet. Cras quis dictum enim. Vestibulum ac rhoncus diam, non venenatis dolor. Curabitur ut velit tincidunt, pulvinar dolor sit amet, tincidunt arcu. Integer at ipsum eu ex blandit consectetur.</p>
+  <p>Vivamus sed ullamcorper ex. Suspendisse potenti. Nam sodales hendrerit enim, non fringilla mauris gravida maximus. Sed pharetra purus eget quam auctor luctus. Aenean arcu nulla, aliquam ut consectetur non, tincidunt eget sem. Aliquam tristique mattis urna, a posuere justo dapibus nec. Aenean non lacinia nisl. Aenean ac bibendum eros. Integer posuere enim tempor auctor venenatis. Etiam convallis nunc at eros ultrices, et elementum erat ultrices.</p>
+    <p>In aliquam maximus dui, nec iaculis nunc gravida et. Cras dapibus porta est, sed finibus arcu viverra in. Vivamus volutpat placerat urna, non varius sapien tempor sit amet. Cras quis dictum enim. Vestibulum ac rhoncus diam, non venenatis dolor. Curabitur ut velit tincidunt, pulvinar dolor sit amet, tincidunt arcu. Integer at ipsum eu ex blandit consectetur.</p>
+  </section>
+  
+  <section id="fifth">
+    <h2>Fifth section</h2>
+    <p>Vivamus in elit non turpis eleifend egestas eget scelerisque turpis. Integer semper eget sem vel porttitor. Phasellus nec rhoncus elit. Donec feugiat mollis dui ac vehicula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+    <p>In aliquam maximus dui, nec iaculis nunc gravida et. Cras dapibus porta est, sed finibus arcu viverra in. Vivamus volutpat placerat urna, non varius sapien tempor sit amet. Cras quis dictum enim. Vestibulum ac rhoncus diam, non venenatis dolor. Curabitur ut velit tincidunt, pulvinar dolor sit amet, tincidunt arcu. Integer at ipsum eu ex blandit consectetur.</p>
+    <p>Fusce quis rutrum turpis. Proin pulvinar, nisi id porttitor laoreet, neque diam finibus eros, a aliquam nibh libero quis nisi. Morbi vehicula tincidunt maximus.</p>
+  </section>
+  
+  <section id="sixth">
+    <h2>Sixth section</h2>
+    <p>Etiam id ex dolor. Curabitur quis tellus vitae neque finibus suscipit. Donec vel nisl ac justo mattis molestie. Vivamus in interdum est. Fusce sed malesuada tellus. Suspendisse imperdiet condimentum sem in tristique. Donec faucibus dui non pharetra cursus. Praesent congue turpis leo, vitae porttitor elit fringilla vel. Phasellus ut aliquet augue. Donec egestas luctus placerat.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nisi nisl, pharetra et odio non, sollicitudin bibendum enim. Integer posuere, est et posuere feugiat, nisi nunc auctor nisi, eu tristique ipsum justo ut tellus. Phasellus molestie ultricies sodales. Nunc nec ligula placerat, vehicula orci a, tincidunt ante. Donec ac metus quis nunc cursus tincidunt.</p>
+  <p>Vivamus sed ullamcorper ex. Suspendisse potenti. Nam sodales hendrerit enim, non fringilla mauris gravida maximus. Sed pharetra purus eget quam auctor luctus. Aenean arcu nulla, aliquam ut consectetur non, tincidunt eget sem. Aliquam tristique mattis urna, a posuere justo dapibus nec. Aenean non lacinia nisl. Aenean ac bibendum eros. Integer posuere enim tempor auctor venenatis. Etiam convallis nunc at eros ultrices, et elementum erat ultrices.</p>
+    <p>In aliquam maximus dui, nec iaculis nunc gravida et. Cras dapibus porta est, sed finibus arcu viverra in. Vivamus volutpat placerat urna, non varius sapien tempor sit amet. Cras quis dictum enim. Vestibulum ac rhoncus diam, non venenatis dolor. Curabitur ut velit tincidunt, pulvinar dolor sit amet, tincidunt arcu. Integer at ipsum eu ex blandit consectetur.</p>
+  </section>
+  
+  <section id="seventh">
+    <h2>Seventh section</h2>
+    <p>Aenean purus ex, auctor id dictum in, consequat ac lacus. Fusce aliquam tellus sed ante porttitor eleifend. Nam rutrum vulputate arcu sed euismod. Fusce diam nunc, cursus eget leo eget, interdum tempus arcu. Maecenas vestibulum faucibus dolor non fermentum. Donec tortor dui, aliquet vitae mauris id, condimentum eleifend felis.</p>
+    <p>In aliquam maximus dui, nec iaculis nunc gravida et. Cras dapibus porta est, sed finibus arcu viverra in. Vivamus volutpat placerat urna, non varius sapien tempor sit amet. Cras quis dictum enim. Vestibulum ac rhoncus diam, non venenatis dolor. Curabitur ut velit tincidunt, pulvinar dolor sit amet, tincidunt arcu. Integer at ipsum eu ex blandit consectetur.</p>
+  <p>Vivamus sed ullamcorper ex. Suspendisse potenti. Nam sodales hendrerit enim, non fringilla mauris gravida maximus. Sed pharetra purus eget quam auctor luctus. Aenean arcu nulla, aliquam ut consectetur non, tincidunt eget sem. Aliquam tristique mattis urna, a posuere justo dapibus nec. Aenean non lacinia nisl. Aenean ac bibendum eros. Integer posuere enim tempor auctor venenatis. Etiam convallis nunc at eros ultrices, et elementum erat ultrices.</p>
+    <p>In aliquam maximus dui, nec iaculis nunc gravida et. Cras dapibus porta est, sed finibus arcu viverra in. Vivamus volutpat placerat urna, non varius sapien tempor sit amet. Cras quis dictum enim. Vestibulum ac rhoncus diam, non venenatis dolor. Curabitur ut velit tincidunt, pulvinar dolor sit amet, tincidunt arcu. Integer at ipsum eu ex blandit consectetur.</p>
+  </section>
+  
+  <section id="eighth">
+    <h2>Eighth section</h2>
+    <p>Vivamus in elit non turpis eleifend egestas eget scelerisque turpis. Integer semper eget sem vel porttitor. Phasellus nec rhoncus elit. Donec feugiat mollis dui ac vehicula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+    <p>In aliquam maximus dui, nec iaculis nunc gravida et. Cras dapibus porta est, sed finibus arcu viverra in. Vivamus volutpat placerat urna, non varius sapien tempor sit amet. Cras quis dictum enim. Vestibulum ac rhoncus diam, non venenatis dolor. Curabitur ut velit tincidunt, pulvinar dolor sit amet, tincidunt arcu. Integer at ipsum eu ex blandit consectetur.</p>
+    <p>Fusce quis rutrum turpis. Proin pulvinar, nisi id porttitor laoreet, neque diam finibus eros, a aliquam nibh libero quis nisi. Morbi vehicula tincidunt maximus.</p>
+  </section>
+  
+</article>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>

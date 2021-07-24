@@ -1,0 +1,87 @@
+$background-color: hsl(0, 0, 15)
+
+body
+  background: $background-color
+  font-family: sans-serif
+  perspective: 600px
+h1, h2
+  position: absolute
+  left: 50%
+  transform: translateX(-50%)
+  color: hsl(0, 0, 100)
+  text-transform: uppercase
+  letter-spacing: 2px
+h1
+  top: 24px
+  font-size: 12px
+h2
+  top: 44px
+  font-size: 10px
+  opacity: 0.7
+  a
+    color: hsl(0, 0, 100)
+    text-decoration: none
+    border-bottom: 1px dotted lighten($background-color, 50%)
+  
+    
+    
+// Loader vars
+$loader-time: 1.4s
+
+$item-size: 24px
+$item-max-size: 80px
+$item-color: hsl(120, 60, 50)
+$item-delay: 0s
+    
+div.loader
+  position: absolute
+  width: $item-size *5
+  height: $item-size *5
+  top: 150px
+  left: 50%
+  padding: 3%
+  background: darken($background-color, 3%)
+  transform-style: preserve-3d
+  transform: translateX(-50%) rotateX(85deg) rotate(-45deg)   
+  div.item
+    float: left
+    position: relative
+    width: $item-size
+    height: $item-size
+    background: $item-color
+    transform-style: preserve-3d  
+    div.lighter,
+    div.darker
+      position: absolute
+      top: 0
+      width: $item-size
+      height: $item-size /2
+    div.lighter
+      background: lighten($item-color, 10%)
+      transform-origin: 50% 0%
+      transform: translateY($item-size) rotateX(-90deg)
+    div.darker
+      background: darken($item-color, 10%)
+      transform-origin: 0% 0%
+      transform: rotate(90deg) rotateX(-90deg)
+    
+@for $i from 1 through 50
+  $random-item: random(25)
+  $item-delay: $item-delay + 0.1
+  div.item-#{$random-item}
+    animation: anim-move $loader-time ease-in-out infinite $item-delay
+    div.lighter,
+    div.darker
+      animation: anim-height $loader-time ease-in-out infinite $item-delay
+  @keyframes anim-move
+    0%, 100%
+      transform: translateZ(0)
+    40%, 60%
+      transform: translateZ($item-max-size)
+  @keyframes anim-height
+    0%, 100%
+      height: $item-size /2
+    40%, 60%
+      height: $item-max-size
+  
+    

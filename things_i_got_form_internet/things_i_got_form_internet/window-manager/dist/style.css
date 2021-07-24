@@ -1,0 +1,227 @@
+body {
+  overflow: overlay;
+}
+.toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.25em;
+  background-color: #e4e4e4;
+  border-top: 1px solid #666;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25em;
+}
+.toolbar .apps {
+  flex: 1 1 auto;
+  border-right: 1px solid #666;
+  padding: 0.5em;
+  margin-right: 0.5em;
+}
+.toolbar .apps img {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+.toolbar .dock {
+  flex: 4 1 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25em;
+  font-family: Arial, sans-serif;
+}
+.toolbar .dock .item {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #e4e4e4;
+  border: 1px solid #a6a6a6;
+  padding: 0.5em;
+  overflow-y: hidden;
+}
+.toolbar .dock .item:hover {
+  cursor: pointer;
+  background-color: #fff;
+  box-shadow: 1px 1px 2px 1px #bfbfbf;
+}
+.toolbar .dock .item .title {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.window {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  position: absolute;
+  top: 2em;
+  left: 2em;
+  right: 2em;
+  bottom: 8em;
+  width: calc(100% - 4em);
+  height: calc(100% - 10em);
+  min-height: 12em;
+  min-width: 12em;
+  z-index: 25;
+  overflow: hidden;
+  background-color: #fff;
+  border: 1px solid #0056b3;
+  resize: both;
+  font: normal normal 16px/24px Arial, sans-serif;
+}
+.window.dragging {
+  box-shadow: 2px 2px 8px 1px #666;
+}
+.window .header,
+.window .body,
+.window .footer {
+  display: flex;
+}
+.window .header,
+.window .footer {
+  padding: 1em;
+}
+.window .header {
+  flex: 0 1 1em;
+  flex-direction: row;
+  position: relative;
+  background-color: #0056b3;
+  color: #fff;
+  cursor: move;
+  box-shadow: 0px 1px 3px 1px #666;
+}
+.window .header .title {
+  flex: 1 0 auto;
+  font-size: 1em;
+  margin: 0;
+  font-weight: 300;
+  max-width: calc(100% - 1.5em);
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.window .header .buttons {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  padding: 0 0 0 1em;
+  z-index: 2;
+}
+.window .header .buttons .close,
+.window .header .buttons .fullscreen,
+.window .header .buttons .minimize {
+  flex: 0 0 0;
+  cursor: pointer;
+  opacity: 0.75;
+}
+.window .header .buttons .close:hover,
+.window .header .buttons .fullscreen:hover,
+.window .header .buttons .minimize:hover {
+  opacity: 1;
+}
+.window .header .buttons .fullscreen {
+  margin-top: 3px;
+}
+.window .header .buttons .minimize {
+  margin-top: -1px;
+}
+.window .header .drag-target {
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  opacity: 0.5;
+}
+.window .body {
+  flex: 1 1 auto;
+  flex-direction: column;
+  overflow-y: overlay;
+}
+.window .body p {
+  display: border-box;
+  padding-bottom: 1em;
+  color: #666;
+}
+.window .footer {
+  flex: 0 1 1em;
+  flex-direction: row;
+  justify-content: flex-end;
+  background-color: #e4e4e4;
+  border-top: 1px solid #666;
+  font: normal normal 10px/14px Arial, sans-serif;
+  box-shadow: inset 0px 0px 3px 1px #999;
+}
+.window .footer .status {
+  flex: 1 1 auto;
+}
+.browser {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.browser .address-bar {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25em;
+  border-bottom: 1px solid #666;
+  background-color: #f2f2f2;
+  padding: 0.25em;
+}
+.browser .address-bar input {
+  flex: 1 1 auto;
+  border: 1px solid #d3d3d3;
+  padding: 0.5em;
+  color: #666;
+}
+.browser .address-bar .working {
+  margin-top: 3px;
+}
+.browser .address-bar .working.loading {
+  animation: load 1.4s infinite linear;
+}
+.browser iframe {
+  flex: 1 1 auto;
+  height: 100%;
+  margin: 0;
+}
+@-moz-keyframes load {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes load {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes load {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes load {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

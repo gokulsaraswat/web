@@ -1,0 +1,190 @@
+@charset "UTF-8";
+* {
+  box-sizing: inherit;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: "Source Serif Pro";
+  font-size: 17px;
+  line-height: 1.6em;
+  margin: 0;
+  box-sizing: border-box;
+  background: #f8f8f8;
+  color: #282828;
+}
+
+.app-container {
+  width: 100%;
+  margin: 2rem auto;
+  max-width: 800px;
+  padding: 1.5rem;
+}
+@media (min-width: 600px) {
+  .app-container {
+    padding: 3rem;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Source Sans Pro";
+  color: #35495e;
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-top: 3.4em;
+}
+
+h3 {
+  font-size: 1.6rem;
+  margin-top: 1.8em;
+}
+
+p {
+  position: relative;
+}
+
+pre {
+  background: #35495e;
+  color: #fff;
+  text-wrap: wrap;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+pre b {
+  color: #bac9d8;
+}
+pre input {
+  background: inherit;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  display: inline;
+  padding: 0;
+  width: auto;
+  margin: none;
+  margin-right: -0.3em;
+  border: none;
+}
+pre input:focus {
+  outline: none;
+}
+pre, pre code {
+  font-family: "Fira Mono";
+  font-size: 0.9em;
+}
+pre.js:before {
+  content: "💻 JAVASCRIPT (Vue instance):";
+}
+
+code {
+  background: #dbe2ea;
+  padding: 0.1em 0.2em;
+}
+
+pre, .demo, .note {
+  line-height: 1.8;
+  padding: 4em 2em 2em;
+  border-radius: 0px;
+  position: relative;
+  margin: 2em 0;
+}
+pre:before, .demo:before, .note:before {
+  color: #bbb;
+  font-family: "Source Sans Pro";
+  content: "💻 HTML (Vue template):";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  display: block;
+  width: 100%;
+  border-radius: inherit;
+  padding: 0.4em 0.4em 0.4em 0.8em;
+  box-sizing: border-box;
+}
+
+ul {
+  margin: 2rem 0;
+}
+
+* + li {
+  margin-top: 1em;
+}
+
+.demo li {
+  margin-top: 0rem;
+}
+
+.demo, p.note {
+  background: inherit;
+  border: 1px solid #42b883;
+  font-family: sans-serif;
+}
+.demo:before, p.note:before {
+  content: "👀 OUTPUT:";
+  color: #fff;
+  background: #42b883;
+}
+
+p.note {
+  font-family: "Source Serif Pro";
+  border-color: #42b883;
+  background: #d6f0e4;
+  border: none;
+  padding: 1em 0.5em 1em 2rem;
+  border-left: 8px solid #42b883;
+}
+p.note:before {
+  content: "💡";
+  background: transparent;
+  top: 0.4em;
+  font-size: 1.5em;
+  left: 0.15em;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+
+input {
+  padding: 0.5em;
+  width: 100%;
+  display: inline-block;
+  font-size: 0.9em;
+}
+input[type=range] {
+  padding: 0;
+  width: auto;
+  display: inline-block;
+}
+
+.comment {
+  color: #aaa;
+}
+
+.highlight {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  left: -0.6em;
+  padding: 0.2em 0 0.2em 0.6em;
+  background: linear-gradient(to right, #47627f, transparent);
+}
+
+.alert {
+  background: red;
+  color: white;
+}
+
+[disabled] {
+  opacity: 0.5;
+}

@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400&display=swap");
+svg {
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0) scale(1);
+  font-smoothing: antialiased !important;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 375px;
+  color: #0e0e11;
+  background: #eeeef1;
+  font-family: "Barlow", sans-serif;
+  font-size: 14px;
+  transition: all 0.1s ease-in-out;
+}
+body[data-theme=dark] {
+  color: white;
+  background: #1c1c21;
+}
+
+.layout {
+  display: grid;
+  grid-template-rows: 20fr auto 21fr;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-areas: "header header header" ". icons ." "footer footer footer";
+  min-height: 192px;
+  flex: 1 0 0;
+  max-width: 1200px;
+}
+
+.icons {
+  display: flex;
+  grid-area: icons;
+}
+.icons button {
+  all: unset;
+  position: relative;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .icons button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    background: white;
+    z-index: -1;
+    border-radius: 10%;
+    transition: all 0.1s ease-in-out;
+  }
+  [data-theme=dark] .icons button::before {
+    background: #0e0e11;
+  }
+}
+.icons button:hover svg, .icons button:hover::before {
+  opacity: 1;
+}
+.icons button:hover svg {
+  color: #05c7b7;
+  fill: #007399;
+}
+.icons button.alt:hover svg {
+  color: #ffaa00;
+  fill: #e5592e;
+}
+
+svg {
+  color: #75758a;
+  fill: #0e0e11;
+}
+[data-theme=dark] svg {
+  color: white;
+  fill: #868698;
+}
+svg.defs {
+  position: absolute;
+  height: 0;
+  width: 0;
+}
+svg.icon {
+  width: 60%;
+  margin: 20%;
+  opacity: 0.6;
+  transition: all 0.1s ease-in-out;
+}
+
+.segmented-control {
+  grid-area: header;
+  justify-self: center;
+  align-self: end;
+  display: flex;
+  width: 144px;
+  margin: 27px 0;
+  height: 27px;
+  border-radius: 5px;
+  background: white;
+  z-index: 1;
+  transition: all 0.1s ease-in-out;
+}
+[data-theme=dark] .segmented-control {
+  background: #0e0e11;
+}
+[data-theme=dark] .segmented-control label {
+  color: #868698;
+}
+[data-theme=dark] .segmented-control label:last-child::before {
+  background-color: #1c1c21;
+}
+.segmented-control input {
+  position: absolute;
+  transform: scale(0);
+}
+.segmented-control input:checked + label {
+  color: inherit;
+}
+.segmented-control input:checked + label ~ label:last-child::before {
+  transform: translate(-100%);
+}
+.segmented-control label {
+  flex: 1 0 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding-bottom: 1px;
+  color: #75758a;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+.segmented-control label:hover {
+  color: inherit;
+}
+.segmented-control label:last-child::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-clip: padding-box;
+  background-color: #eeeef1;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  z-index: -1;
+  transition: transform 0.25s ease-in-out, background-color 0.1s ease-in-out;
+}
